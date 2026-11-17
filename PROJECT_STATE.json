@@ -1,0 +1,16 @@
+{
+  "project": "Carcinization",
+  "stage": "e0_public_results_and_e1_prepared",
+  "execution_enabled": false,
+  "actual_model_calls": 0,
+  "paid_experiment_calls": 0,
+  "evidence_class": "public_source_export_no_raw_run_data",
+  "source_pdf_status": "paper_manifest_metadata_only",
+  "next_actions": [
+    "Set the cumulative budget and recheck current prices before E1 live execution.",
+    "Complete source/version and evaluation preparation before the separate six-paper batch."
+  ],
+  "note": "Counters describe runs in this source checkout; historical workspace runs are not included.",
+  "published_results": "results/e0_20261117",
+  "e1_status": "prepared_no_paid_calls_budget_pending"
+}

@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+.venv/
+.env
+.env.*
+!.env.example
+*.log
+*.pdf
+*.zip
+experiment/runs/
+experiment/logs/
+experiment/tmp/
+experiment/inputs/private_gold/
+experiment/manifests/people/
+config/*.local.json
+reports/local_*
