@@ -1,0 +1,29 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "enum": [
+        "success",
+        "truncated",
+        "empty",
+        "refusal",
+        "off_task",
+        "parse_failure",
+        "uncertain"
+      ]
+    },
+    "terminal_no_issue": {
+      "type": "boolean"
+    },
+    "reason": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "status",
+    "terminal_no_issue",
+    "reason"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

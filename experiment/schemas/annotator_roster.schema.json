@@ -1,0 +1,112 @@
+{
+  "type": "object",
+  "properties": {
+    "people": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "person_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "kind": {
+            "enum": [
+              "human"
+            ]
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "scientific_annotation",
+                "structural_annotation",
+                "adjudication",
+                "researcher_activation",
+                "reader"
+              ]
+            }
+          },
+          "approval_evidence_id": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "person_id",
+          "kind",
+          "roles",
+          "approval_evidence_id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "schema_version": {
+      "const": "2.3"
+    },
+    "namespace": {
+      "const": "CONVERGENCE"
+    },
+    "study_id": {
+      "const": "conv_review_trajectory"
+    },
+    "evidence_class": {
+      "enum": [
+        "engineering_validation",
+        "synthetic_identifiability",
+        "unapproved_candidate_discovery",
+        "pilot_llm_judge_labeled",
+        "pilot_llm_judge_labeled_batch2",
+        "diagnostic_only"
+      ]
+    },
+    "record_id": {
+      "type": "string",
+      "pattern": "^conv_[A-Za-z0-9_-]+$"
+    },
+    "label_source": {
+      "type": "string",
+      "minLength": 1
+    },
+    "rubric_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "fixture": {
+      "type": "boolean"
+    },
+    "illustrative": {
+      "type": "boolean"
+    },
+    "data_origin": {
+      "enum": [
+        "real",
+        "illustrative",
+        "fixture",
+        "synthetic"
+      ]
+    },
+    "parent_record_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "required": [
+    "people",
+    "schema_version",
+    "namespace",
+    "study_id",
+    "record_id",
+    "evidence_class",
+    "label_source",
+    "rubric_version",
+    "fixture",
+    "illustrative",
+    "data_origin",
+    "parent_record_ids"
+  ],
+  "additionalProperties": false
+}

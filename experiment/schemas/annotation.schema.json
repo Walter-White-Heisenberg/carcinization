@@ -1,0 +1,158 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "annotation_id",
+    "blind_document_id",
+    "unit_id",
+    "dimension",
+    "label",
+    "evidence_ids",
+    "reason",
+    "annotator_id",
+    "illustrative",
+    "schema_version",
+    "namespace",
+    "study_id",
+    "record_id",
+    "evidence_class",
+    "label_source",
+    "rubric_version",
+    "fixture",
+    "data_origin",
+    "parent_record_ids"
+  ],
+  "properties": {
+    "annotation_id": {
+      "type": "string"
+    },
+    "blind_document_id": {
+      "type": "string"
+    },
+    "unit_id": {
+      "type": "string"
+    },
+    "dimension": {
+      "enum": [
+        "structure",
+        "issue_identity",
+        "review_validity",
+        "Q1",
+        "Q2",
+        "Q3",
+        "Q4",
+        "Q5"
+      ]
+    },
+    "label": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "evidence_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "reason": {
+      "type": "string"
+    },
+    "annotator_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "illustrative": {
+      "type": "boolean"
+    },
+    "source_span": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "document_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "start": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "end": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "quote": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "document_id",
+        "start",
+        "end",
+        "quote"
+      ],
+      "additionalProperties": false
+    },
+    "sampling_probability": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "exclusiveMinimum": 0,
+      "maximum": 1
+    },
+    "schema_version": {
+      "const": "2.3"
+    },
+    "namespace": {
+      "const": "CONVERGENCE"
+    },
+    "study_id": {
+      "const": "conv_review_trajectory"
+    },
+    "evidence_class": {
+      "enum": [
+        "engineering_validation",
+        "synthetic_identifiability",
+        "unapproved_candidate_discovery",
+        "pilot_llm_judge_labeled",
+        "pilot_llm_judge_labeled_batch2",
+        "diagnostic_only"
+      ]
+    },
+    "record_id": {
+      "type": "string",
+      "pattern": "^conv_[A-Za-z0-9_-]+$"
+    },
+    "label_source": {
+      "type": "string",
+      "minLength": 1
+    },
+    "rubric_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "fixture": {
+      "type": "boolean"
+    },
+    "data_origin": {
+      "enum": [
+        "real",
+        "illustrative",
+        "fixture",
+        "synthetic"
+      ]
+    },
+    "parent_record_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "additionalProperties": false
+}

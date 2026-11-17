@@ -1,0 +1,61 @@
+{
+  "type": "object",
+  "properties": {
+    "questions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "question_id": {
+            "type": "string"
+          },
+          "anchor_acu_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "question": {
+            "type": "string"
+          },
+          "gold_answer": {
+            "type": "string"
+          },
+          "acceptable_variants": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "evidence_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "task": {
+            "enum": [
+              "understanding",
+              "location"
+            ]
+          }
+        },
+        "required": [
+          "question_id",
+          "anchor_acu_ids",
+          "question",
+          "gold_answer",
+          "acceptable_variants",
+          "evidence_ids",
+          "task"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "questions"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

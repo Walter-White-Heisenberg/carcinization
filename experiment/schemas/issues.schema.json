@@ -1,0 +1,100 @@
+{
+  "type": "object",
+  "properties": {
+    "issues": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "local_id": {
+            "type": "string"
+          },
+          "target": {
+            "type": "string"
+          },
+          "diagnosis": {
+            "type": "string"
+          },
+          "basis": {
+            "type": "string"
+          },
+          "source_quotes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "manuscript_locations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "occurrence_count": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "existence_stance": {
+            "enum": [
+              "exists",
+              "does_not_exist",
+              "not_stated"
+            ]
+          },
+          "active_concern": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "certainty": {
+            "enum": [
+              "possible",
+              "probable",
+              "asserted",
+              "not_stated"
+            ]
+          },
+          "severity": {
+            "enum": [
+              "minor",
+              "major",
+              "blocking",
+              "not_stated"
+            ]
+          },
+          "recommendation": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "explicit_withdrawal": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "local_id",
+          "target",
+          "diagnosis",
+          "basis",
+          "source_quotes",
+          "manuscript_locations",
+          "occurrence_count",
+          "existence_stance",
+          "active_concern",
+          "certainty",
+          "severity",
+          "recommendation",
+          "explicit_withdrawal"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "issues"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

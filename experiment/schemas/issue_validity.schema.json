@@ -1,0 +1,74 @@
+{
+  "type": "object",
+  "properties": {
+    "validity": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "issue_id": {
+            "type": "string"
+          },
+          "manuscript_blind_id": {
+            "type": "string"
+          },
+          "label": {
+            "enum": [
+              "valid",
+              "invalid",
+              "uncertain",
+              "disputed"
+            ]
+          },
+          "current_applicability": {
+            "enum": [
+              "applies",
+              "resolved",
+              "not_applicable",
+              "unassessable"
+            ]
+          },
+          "actual_impact": {
+            "enum": [
+              "local",
+              "affects_key_result",
+              "blocks_core_claim",
+              "uncertain"
+            ]
+          },
+          "evidence_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "locations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "reason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "issue_id",
+          "manuscript_blind_id",
+          "label",
+          "current_applicability",
+          "actual_impact",
+          "evidence_ids",
+          "locations",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "validity"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

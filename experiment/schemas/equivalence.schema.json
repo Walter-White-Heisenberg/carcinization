@@ -1,0 +1,61 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "enum": [
+        "equivalent",
+        "non_equivalent",
+        "uncertain"
+      ]
+    },
+    "changes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "source_location": {
+            "type": "string"
+          },
+          "candidate_location": {
+            "type": "string"
+          },
+          "change_type": {
+            "enum": [
+              "content",
+              "organization",
+              "uncertain"
+            ]
+          },
+          "description": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "source_location",
+          "candidate_location",
+          "change_type",
+          "description"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "organization_changed": {
+      "enum": [
+        "yes",
+        "no",
+        "uncertain"
+      ]
+    },
+    "reason": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "status",
+    "changes",
+    "organization_changed",
+    "reason"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

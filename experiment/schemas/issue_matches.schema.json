@@ -1,0 +1,49 @@
+{
+  "type": "object",
+  "properties": {
+    "matches": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "candidate_id": {
+            "type": "string"
+          },
+          "registry_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "decision": {
+            "enum": [
+              "same",
+              "new",
+              "uncertain_match"
+            ]
+          },
+          "reason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "candidate_id",
+          "registry_id",
+          "decision",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "possible_registry_duplicates": {
+      "type": "array",
+      "items": {}
+    }
+  },
+  "required": [
+    "matches",
+    "possible_registry_duplicates"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

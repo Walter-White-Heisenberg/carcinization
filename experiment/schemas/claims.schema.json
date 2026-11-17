@@ -1,0 +1,78 @@
+{
+  "type": "object",
+  "properties": {
+    "claims": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "claim_id": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          },
+          "source_quote": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          },
+          "claim_type": {
+            "enum": [
+              "numeric",
+              "method",
+              "theory",
+              "empirical",
+              "literature",
+              "other"
+            ]
+          },
+          "scope": {
+            "type": "string"
+          },
+          "conditions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "certainty": {
+            "type": "string"
+          },
+          "negation": {
+            "type": "boolean"
+          },
+          "core": {
+            "type": "boolean"
+          },
+          "cited_evidence_locations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "claim_id",
+          "text",
+          "source_quote",
+          "location",
+          "claim_type",
+          "scope",
+          "conditions",
+          "certainty",
+          "negation",
+          "core",
+          "cited_evidence_locations"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "claims"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

@@ -1,0 +1,61 @@
+{
+  "type": "object",
+  "properties": {
+    "acus": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "acu_id": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "method",
+              "finding",
+              "theory",
+              "counterexample",
+              "boundary",
+              "resource",
+              "other"
+            ]
+          },
+          "source_quotes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "conditions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "verification_status": {
+            "enum": [
+              "unverified"
+            ]
+          }
+        },
+        "required": [
+          "acu_id",
+          "content",
+          "type",
+          "source_quotes",
+          "conditions",
+          "verification_status"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "acus"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

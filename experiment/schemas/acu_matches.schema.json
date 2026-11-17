@@ -1,0 +1,79 @@
+{
+  "type": "object",
+  "properties": {
+    "reference_matches": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "reference_acu_id": {
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "retained",
+              "narrowed",
+              "omitted",
+              "distorted",
+              "unassessable"
+            ]
+          },
+          "candidate_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "candidate_locations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "reason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "reference_acu_id",
+          "status",
+          "candidate_ids",
+          "candidate_locations",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "proposed_additions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "candidate_acu_id": {
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "unverified_added"
+            ]
+          },
+          "reason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "candidate_acu_id",
+          "status",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "reference_matches",
+    "proposed_additions"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

@@ -1,0 +1,67 @@
+{
+  "type": "object",
+  "properties": {
+    "claim_matches": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "local_claim_id": {
+            "type": "string"
+          },
+          "claim_family_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "scope_variant_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "decision": {
+            "enum": [
+              "same_proposition",
+              "scope_variant",
+              "new_proposition",
+              "uncertain_match"
+            ]
+          },
+          "previous_presence": {
+            "enum": [
+              "present",
+              "absent_after_check",
+              "unassessable"
+            ]
+          },
+          "source_locations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "reason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "local_claim_id",
+          "claim_family_id",
+          "scope_variant_id",
+          "decision",
+          "previous_presence",
+          "source_locations",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "claim_matches"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

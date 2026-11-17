@@ -1,0 +1,1411 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "metric_id",
+    "paper_id",
+    "condition",
+    "round",
+    "value",
+    "denominator",
+    "null_reason",
+    "illustrative",
+    "schema_version",
+    "namespace",
+    "study_id",
+    "record_id",
+    "evidence_class",
+    "label_source",
+    "rubric_version",
+    "fixture",
+    "data_origin",
+    "parent_record_ids",
+    "components"
+  ],
+  "properties": {
+    "metric_id": {
+      "enum": [
+        "S01",
+        "S02",
+        "S03",
+        "S04",
+        "S05",
+        "S06",
+        "S07",
+        "S08",
+        "S09",
+        "S10",
+        "S11",
+        "S12",
+        "S13",
+        "J01",
+        "J02",
+        "J03",
+        "J04",
+        "J05",
+        "J06",
+        "Q11",
+        "Q12",
+        "Q21",
+        "Q22",
+        "Q31",
+        "Q32",
+        "Q41",
+        "Q42",
+        "Q43",
+        "Q51",
+        "Q52",
+        "Q53",
+        "V01",
+        "V02",
+        "V03",
+        "V04",
+        "V05",
+        "X01",
+        "X02",
+        "X03",
+        "X04"
+      ]
+    },
+    "paper_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "condition": {
+      "enum": [
+        "A_INDEPENDENT",
+        "A_LOOP",
+        "B_DESCRIPTIVE",
+        "B_DIRECT",
+        "B_DIRECT2",
+        "B_INITIAL",
+        "B_REVIEW",
+        "C_KEEP",
+        "C_PERTURB",
+        "DEVELOPMENT",
+        null
+      ]
+    },
+    "round": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "value": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "denominator": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "null_reason": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "illustrative": {
+      "type": "boolean"
+    },
+    "schema_version": {
+      "const": "2.3"
+    },
+    "namespace": {
+      "const": "CONVERGENCE"
+    },
+    "study_id": {
+      "const": "conv_review_trajectory"
+    },
+    "evidence_class": {
+      "enum": [
+        "engineering_validation",
+        "synthetic_identifiability",
+        "unapproved_candidate_discovery",
+        "pilot_llm_judge_labeled",
+        "pilot_llm_judge_labeled_batch2",
+        "diagnostic_only"
+      ]
+    },
+    "record_id": {
+      "type": "string",
+      "pattern": "^conv_[A-Za-z0-9_-]+$"
+    },
+    "label_source": {
+      "type": "string",
+      "minLength": 1
+    },
+    "rubric_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "fixture": {
+      "type": "boolean"
+    },
+    "data_origin": {
+      "enum": [
+        "real",
+        "illustrative",
+        "fixture",
+        "synthetic"
+      ]
+    },
+    "parent_record_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "components": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "value": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "denominator": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0
+          },
+          "reason": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "name",
+          "value",
+          "denominator",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "metric_id": {
+            "const": "S01"
+          }
+        },
+        "required": [
+          "metric_id"
+        ]
+      },
+      "then": {
+        "properties": {
+          "components": {
+            "items": {
+              "properties": {
+                "name": {
+                  "enum": [
+                    "D"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "metric_id": {
+            "const": "S02"
+          }
+        },
+        "required": [
+          "metric_id"
+        ]
+      },
+      "then": {
+        "properties": {
+          "components": {
+            "items": {
+              "properties": {
+                "name": {
+                  "enum": [
+                    "C"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "metric_id": {
+            "const": "S03"
+          }
+        },
+        "required": [
+          "metric_id"
+        ]
+      },
+      "then": {
+        "properties": {
+          "components": {
+            "items": {
+              "properties": {
+                "name": {
+                  "enum": [
+                    "delta_C"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "metric_id": {
+            "const": "S04"
+          }
+        },
+        "required": [
+          "metric_id"
+        ]
+      },
+      "then": {
+        "properties": {
+          "components": {
+            "items": {
+              "properties": {
+                "name": {
+                  "enum": [
+                    "distance"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "metric_id": {
+            "const": "S05"
+          }
+        },
+        "required": [
+          "metric_id"
+        ]
+      },
+      "then": {
+        "properties": {
+          "components": {
+            "items": {
+              "properties": {
+                "name": {
+                  "enum": [
+                    "distance"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "metric_id": {
+            "const": "S06"
+          }
+        },
+        "required": [
+          "metric_id"
+        ]
+      },
+      "then": {
+        "properties": {
+          "components": {
+            "items": {
+              "properties": {
+                "name": {
+                  "enum": [
+                    "similarity"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "metric_id": {
+            "const": "S07"
+          }
+        },
+        "required": [
+          "metric_id"
+        ]
+      },
+      "then": {
+        "properties": {
+          "components": {
+            "items": {
+              "properties": {
+                "name": {
+                  "enum": [
+                    "similarity"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "metric_id": {
+            "const": "S08"
+          }
+        },
+        "required": [
+          "metric_id"
+        ]
+      },
+      "then": {
+        "properties": {
+          "components": {
+            "items": {
+              "properties": {
+                "name": {
+                  "enum": [
+                    "distance"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "metric_id": {
+            "const": "S09"
+          }
+        },
+        "required": [
+          "metric_id"
+        ]
+      },
+      "then": {
+        "properties": {
+          "components": {
+            "items": {
+              "properties": {
+                "name": {
+                  "enum": [
+                    "specificity"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "metric_id": {
+            "const": "S10"
+          }
+        },
+        "required": [
+          "metric_id"
+        ]
+      },
+      "then": {
+        "properties": {
+          "components": {
+            "items": {
+              "properties": {
+                "name": {
+                  "enum": [
+                    "vendi"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "metric_id": {
+            "const": "S11"
+          }
+        },
+        "required": [
+          "metric_id"
+        ]
+      },
+      "then": {
+        "properties": {
+          "components": {
+            "items": {
+              "properties": {
+                "name": {
+                  "enum": [
+                    "similarity"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "metric_id": {
+            "const": "S12"
+          }
+        },
+        "required": [
+          "metric_id"
+        ]
+      },
+      "then": {
+        "properties": {
+          "components": {
+            "items": {
+              "properties": {
+                "name": {
+                  "enum": [
+                    "distance"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "metric_id": {
+            "const": "S13"
+          }
+        },
+        "required": [
+          "metric_id"
+        ]
+      },
+      "then": {
+        "properties": {
+          "components": {
+            "items": {
+              "properties": {
+                "name": {
+                  "enum": [
+                    "initial_homogeneous",
+                    "n_papers",
+                    "rate"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "metric_id": {
+            "const": "J01"
+          }
+        },
+        "required": [
+          "metric_id"
+        ]
+      },
+      "then": {
+        "properties": {
+          "components": {
+            "items": {
+              "properties": {
+                "name": {
+                  "enum": [
+                    "valid",
+                    "invalid",
+                    "uncertain",
+                    "disputed",
+                    "precision",
+                    "coverage"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "metric_id": {
+            "const": "J02"
+          }
+        },
+        "required": [
+          "metric_id"
+        ]
+      },
+      "then": {
+        "properties": {
+          "components": {
+            "items": {
+              "properties": {
+                "name": {
+                  "enum": [
+                    "found",
+                    "fixed_n",
+                    "unknown",
+                    "lower",
+                    "upper",
+                    "evaluable",
+                    "unknown_found",
+                    "unknown_not_found",
+                    "repaired",
+                    "not_applicable"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "metric_id": {
+            "const": "J03"
+          }
+        },
+        "required": [
+          "metric_id"
+        ]
+      },
+      "then": {
+        "properties": {
+          "components": {
+            "items": {
+              "properties": {
+                "name": {
+                  "enum": [
+                    "retained",
+                    "eligible",
+                    "rate",
+                    "unknown"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "metric_id": {
+            "const": "J04"
+          }
+        },
+        "required": [
+          "metric_id"
+        ]
+      },
+      "then": {
+        "properties": {
+          "components": {
+            "items": {
+              "properties": {
+                "name": {
+                  "enum": [
+                    "persisted",
+                    "eligible",
+                    "rate",
+                    "became_valid",
+                    "unknown"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "metric_id": {
+            "const": "J05"
+          }
+        },
+        "required": [
+          "metric_id"
+        ]
+      },
+      "then": {
+        "properties": {
+          "components": {
+            "items": {
+              "properties": {
+                "name": {
+                  "enum": [
+                    "new",
+                    "returned",
+                    "initial"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "metric_id": {
+            "const": "J06"
+          }
+        },
+        "required": [
+          "metric_id"
+        ]
+      },
+      "then": {
+        "properties": {
+          "components": {
+            "items": {
+              "properties": {
+                "name": {
+                  "enum": [
+                    "reversed",
+                    "opportunities",
+                    "rate",
+                    "excluded",
+                    "unknown"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "metric_id": {
+            "const": "Q11"
+          }
+        },
+        "required": [
+          "metric_id"
+        ]
+      },
+      "then": {
+        "properties": {
+          "components": {
+            "items": {
+              "properties": {
+                "name": {
+                  "enum": [
+                    "repaired",
+                    "removed",
+                    "remaining",
+                    "unassessable",
+                    "initial_confirmed_error",
+                    "repair_rate",
+                    "lower",
+                    "upper"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "metric_id": {
+            "const": "Q12"
+          }
+        },
+        "required": [
+          "metric_id"
+        ]
+      },
+      "then": {
+        "properties": {
+          "components": {
+            "items": {
+              "properties": {
+                "name": {
+                  "enum": [
+                    "newly_introduced_error",
+                    "newly_detected_preexisting_error",
+                    "origin_unknown",
+                    "verified_count",
+                    "audited_count",
+                    "unverified",
+                    "coverage",
+                    "lower",
+                    "upper"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "metric_id": {
+            "const": "Q21"
+          }
+        },
+        "required": [
+          "metric_id"
+        ]
+      },
+      "then": {
+        "properties": {
+          "components": {
+            "items": {
+              "properties": {
+                "name": {
+                  "enum": [
+                    "supported",
+                    "partially_supported",
+                    "insufficient_support",
+                    "contradicted",
+                    "unassessable",
+                    "total"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "metric_id": {
+            "const": "Q22"
+          }
+        },
+        "required": [
+          "metric_id"
+        ]
+      },
+      "then": {
+        "properties": {
+          "components": {
+            "items": {
+              "properties": {
+                "name": {
+                  "enum": [
+                    "minicheck_raw_score",
+                    "alignscore_raw_score"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "metric_id": {
+            "const": "Q31"
+          }
+        },
+        "required": [
+          "metric_id"
+        ]
+      },
+      "then": {
+        "properties": {
+          "components": {
+            "items": {
+              "properties": {
+                "name": {
+                  "enum": [
+                    "sufficient",
+                    "partial",
+                    "missing",
+                    "not_applicable",
+                    "unknown",
+                    "applicable_assessable",
+                    "coverage",
+                    "lower",
+                    "upper"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "metric_id": {
+            "const": "Q32"
+          }
+        },
+        "required": [
+          "metric_id"
+        ]
+      },
+      "then": {
+        "properties": {
+          "components": {
+            "items": {
+              "properties": {
+                "name": {
+                  "enum": [
+                    "covered",
+                    "fixed_n",
+                    "unknown",
+                    "lower",
+                    "upper"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "metric_id": {
+            "const": "Q41"
+          }
+        },
+        "required": [
+          "metric_id"
+        ]
+      },
+      "then": {
+        "properties": {
+          "components": {
+            "items": {
+              "properties": {
+                "name": {
+                  "enum": [
+                    "retained",
+                    "fixed_n",
+                    "narrowed",
+                    "omitted",
+                    "distorted",
+                    "unassessable",
+                    "lower",
+                    "upper"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "metric_id": {
+            "const": "Q42"
+          }
+        },
+        "required": [
+          "metric_id"
+        ]
+      },
+      "then": {
+        "properties": {
+          "components": {
+            "items": {
+              "properties": {
+                "name": {
+                  "enum": [
+                    "valid_added",
+                    "invalid_added",
+                    "unverified_added",
+                    "total"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "metric_id": {
+            "const": "Q43"
+          }
+        },
+        "required": [
+          "metric_id"
+        ]
+      },
+      "then": {
+        "properties": {
+          "components": {
+            "items": {
+              "properties": {
+                "name": {
+                  "enum": [
+                    "recall",
+                    "precision",
+                    "f1",
+                    "matched_acus",
+                    "reference_acus"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "metric_id": {
+            "const": "Q51"
+          }
+        },
+        "required": [
+          "metric_id"
+        ]
+      },
+      "then": {
+        "properties": {
+          "components": {
+            "items": {
+              "properties": {
+                "name": {
+                  "enum": [
+                    "correct",
+                    "comparable",
+                    "fixed_n",
+                    "accuracy",
+                    "coverage"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "metric_id": {
+            "const": "Q52"
+          }
+        },
+        "required": [
+          "metric_id"
+        ]
+      },
+      "then": {
+        "properties": {
+          "components": {
+            "items": {
+              "properties": {
+                "name": {
+                  "enum": [
+                    "answer_time",
+                    "location_time",
+                    "clarifications",
+                    "respondents"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "metric_id": {
+            "const": "Q53"
+          }
+        },
+        "required": [
+          "metric_id"
+        ]
+      },
+      "then": {
+        "properties": {
+          "components": {
+            "items": {
+              "properties": {
+                "name": {
+                  "enum": [
+                    "a_better",
+                    "b_better",
+                    "tie",
+                    "uncertain",
+                    "respondents"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "metric_id": {
+            "const": "V01"
+          }
+        },
+        "required": [
+          "metric_id"
+        ]
+      },
+      "then": {
+        "properties": {
+          "components": {
+            "items": {
+              "properties": {
+                "name": {
+                  "enum": [
+                    "precision",
+                    "recall",
+                    "f1",
+                    "kappa",
+                    "matched_blocks",
+                    "m_ratio",
+                    "o_ratio"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "metric_id": {
+            "const": "V02"
+          }
+        },
+        "required": [
+          "metric_id"
+        ]
+      },
+      "then": {
+        "properties": {
+          "components": {
+            "items": {
+              "properties": {
+                "name": {
+                  "enum": [
+                    "precision",
+                    "recall",
+                    "f1",
+                    "fpr",
+                    "fnr",
+                    "coverage",
+                    "count"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "metric_id": {
+            "const": "V03"
+          }
+        },
+        "required": [
+          "metric_id"
+        ]
+      },
+      "then": {
+        "properties": {
+          "components": {
+            "items": {
+              "properties": {
+                "name": {
+                  "enum": [
+                    "agreement",
+                    "kappa",
+                    "count"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "metric_id": {
+            "const": "V04"
+          }
+        },
+        "required": [
+          "metric_id"
+        ]
+      },
+      "then": {
+        "properties": {
+          "components": {
+            "items": {
+              "properties": {
+                "name": {
+                  "enum": [
+                    "error",
+                    "unknown",
+                    "coverage",
+                    "count",
+                    "lower",
+                    "upper"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "metric_id": {
+            "const": "V05"
+          }
+        },
+        "required": [
+          "metric_id"
+        ]
+      },
+      "then": {
+        "properties": {
+          "components": {
+            "items": {
+              "properties": {
+                "name": {
+                  "enum": [
+                    "agreement",
+                    "flip_rate",
+                    "count"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "metric_id": {
+            "const": "X01"
+          }
+        },
+        "required": [
+          "metric_id"
+        ]
+      },
+      "then": {
+        "properties": {
+          "components": {
+            "items": {
+              "properties": {
+                "name": {
+                  "enum": [
+                    "count",
+                    "rate",
+                    "planned",
+                    "terminal_no_issue"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "metric_id": {
+            "const": "X02"
+          }
+        },
+        "required": [
+          "metric_id"
+        ]
+      },
+      "then": {
+        "properties": {
+          "components": {
+            "items": {
+              "properties": {
+                "name": {
+                  "enum": [
+                    "input_tokens",
+                    "output_tokens",
+                    "reasoning_tokens",
+                    "cache_read_tokens",
+                    "cache_write_tokens",
+                    "cost",
+                    "elapsed_seconds",
+                    "units",
+                    "violations"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "metric_id": {
+            "const": "X03"
+          }
+        },
+        "required": [
+          "metric_id"
+        ]
+      },
+      "then": {
+        "properties": {
+          "components": {
+            "items": {
+              "properties": {
+                "name": {
+                  "enum": [
+                    "distance_to_start",
+                    "distance_to_keep",
+                    "step"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "metric_id": {
+            "const": "X04"
+          }
+        },
+        "required": [
+          "metric_id"
+        ]
+      },
+      "then": {
+        "properties": {
+          "components": {
+            "items": {
+              "properties": {
+                "name": {
+                  "enum": [
+                    "ordinal_rating",
+                    "count"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

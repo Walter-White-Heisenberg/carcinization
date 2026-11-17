@@ -1,0 +1,121 @@
+{
+  "type": "object",
+  "properties": {
+    "decisions": {
+      "type": "object",
+      "patternProperties": {
+        "^conv_[A-Za-z0-9_]+$": {
+          "type": "object",
+          "properties": {
+            "unit_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "resolution": {
+              "type": "string",
+              "minLength": 1
+            },
+            "adjudicator_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "blind_document_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "rubric_version": {
+              "type": "string",
+              "minLength": 1
+            },
+            "approved_at_utc": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "approval_evidence_id": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "unit_id",
+            "resolution",
+            "adjudicator_id",
+            "blind_document_id",
+            "rubric_version",
+            "approved_at_utc",
+            "approval_evidence_id"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "schema_version": {
+      "const": "2.3"
+    },
+    "namespace": {
+      "const": "CONVERGENCE"
+    },
+    "study_id": {
+      "const": "conv_review_trajectory"
+    },
+    "evidence_class": {
+      "enum": [
+        "engineering_validation",
+        "synthetic_identifiability",
+        "unapproved_candidate_discovery",
+        "pilot_llm_judge_labeled",
+        "pilot_llm_judge_labeled_batch2",
+        "diagnostic_only"
+      ]
+    },
+    "record_id": {
+      "type": "string",
+      "pattern": "^conv_[A-Za-z0-9_-]+$"
+    },
+    "label_source": {
+      "type": "string",
+      "minLength": 1
+    },
+    "rubric_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "fixture": {
+      "type": "boolean"
+    },
+    "illustrative": {
+      "type": "boolean"
+    },
+    "data_origin": {
+      "enum": [
+        "real",
+        "illustrative",
+        "fixture",
+        "synthetic"
+      ]
+    },
+    "parent_record_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "required": [
+    "decisions",
+    "schema_version",
+    "namespace",
+    "study_id",
+    "record_id",
+    "evidence_class",
+    "label_source",
+    "rubric_version",
+    "fixture",
+    "illustrative",
+    "data_origin",
+    "parent_record_ids"
+  ],
+  "additionalProperties": false
+}

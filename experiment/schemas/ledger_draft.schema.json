@@ -1,0 +1,226 @@
+{
+  "type": "object",
+  "properties": {
+    "facts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "item_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "statement": {
+            "type": "string"
+          },
+          "verification_status": {
+            "enum": [
+              "unverified"
+            ]
+          },
+          "evidence_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "locations": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "reason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "item_id",
+          "statement",
+          "verification_status",
+          "evidence_ids",
+          "locations",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "initial_defect_candidates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "item_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "target": {
+            "type": "string"
+          },
+          "diagnosis": {
+            "type": "string"
+          },
+          "severity_candidate": {
+            "enum": [
+              "major",
+              "minor",
+              "blocking",
+              "unknown"
+            ]
+          },
+          "evidence_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "locations": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "reason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "item_id",
+          "target",
+          "diagnosis",
+          "severity_candidate",
+          "evidence_ids",
+          "locations",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "scientific_unit_candidates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "acu_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "content": {
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "method",
+              "finding",
+              "theory",
+              "counterexample",
+              "boundary",
+              "resource",
+              "other"
+            ]
+          },
+          "source_quotes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "conditions": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "verification_status": {
+            "enum": [
+              "unverified"
+            ]
+          }
+        },
+        "required": [
+          "acu_id",
+          "content",
+          "type",
+          "source_quotes",
+          "conditions",
+          "verification_status"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "necessary_items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "item_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "dependent_claim_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "reproducibility_task": {
+            "type": "string"
+          },
+          "necessity_reason": {
+            "type": "string"
+          },
+          "acceptable_locations": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "applicability": {
+            "enum": [
+              "applicable",
+              "not_applicable",
+              "uncertain"
+            ]
+          },
+          "evidence_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "required": [
+          "item_id",
+          "dependent_claim_ids",
+          "reproducibility_task",
+          "necessity_reason",
+          "acceptable_locations",
+          "applicability",
+          "evidence_ids"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "human_approval_required": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "facts",
+    "initial_defect_candidates",
+    "scientific_unit_candidates",
+    "necessary_items",
+    "human_approval_required"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

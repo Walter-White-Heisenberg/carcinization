@@ -1,0 +1,68 @@
+{
+  "type": "object",
+  "properties": {
+    "boundary_corrections": {
+      "type": "array",
+      "items": {}
+    },
+    "labels": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "block_id": {
+            "type": "string"
+          },
+          "role": {
+            "enum": [
+              null,
+              "S",
+              "P",
+              "N",
+              "Q",
+              "A",
+              "V",
+              "M",
+              "O",
+              "I",
+              "B",
+              "T",
+              "E",
+              "R",
+              "D",
+              "X"
+            ]
+          },
+          "confidence": {
+            "enum": [
+              "high",
+              "medium",
+              "low"
+            ]
+          },
+          "reason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "block_id",
+          "role",
+          "confidence",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "unresolved": {
+      "type": "array",
+      "items": {}
+    }
+  },
+  "required": [
+    "boundary_corrections",
+    "labels",
+    "unresolved"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

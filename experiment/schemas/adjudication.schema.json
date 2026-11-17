@@ -1,0 +1,82 @@
+{
+  "type": "object",
+  "properties": {
+    "unit_id": {
+      "type": "string"
+    },
+    "resolution": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "disagreement_type": {
+      "type": "string"
+    },
+    "evidence_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "reason": {
+      "type": "string"
+    },
+    "requires_human_decision": {
+      "type": "boolean"
+    },
+    "adjudicator_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "human_approval_record_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "unit_id",
+    "resolution",
+    "disagreement_type",
+    "evidence_ids",
+    "reason",
+    "requires_human_decision",
+    "adjudicator_id",
+    "human_approval_record_id"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "resolution": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "resolution"
+        ]
+      },
+      "then": {
+        "properties": {
+          "adjudicator_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "human_approval_record_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "requires_human_decision": {
+            "const": false
+          }
+        }
+      }
+    }
+  ]
+}

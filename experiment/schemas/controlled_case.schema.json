@@ -1,0 +1,118 @@
+{
+  "type": "object",
+  "properties": {
+    "case_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "kind": {
+      "type": "string"
+    },
+    "source_text": {
+      "type": "string"
+    },
+    "variant_text": {
+      "type": "string"
+    },
+    "change_type": {
+      "enum": [
+        "numeric_error",
+        "scope_expansion",
+        "necessary_information_deletion",
+        "verified_finding_deletion",
+        "meaning_preserving_paraphrase",
+        "content_preserving_reorder",
+        "style_edit",
+        "unchanged",
+        "negation_error"
+      ]
+    },
+    "possibly_affected_dimensions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "rationale": {
+      "type": "string"
+    },
+    "expert_validated": {
+      "type": "boolean"
+    },
+    "schema_version": {
+      "const": "2.3"
+    },
+    "namespace": {
+      "const": "CONVERGENCE"
+    },
+    "study_id": {
+      "const": "conv_review_trajectory"
+    },
+    "evidence_class": {
+      "enum": [
+        "engineering_validation",
+        "synthetic_identifiability",
+        "unapproved_candidate_discovery",
+        "pilot_llm_judge_labeled",
+        "pilot_llm_judge_labeled_batch2",
+        "diagnostic_only"
+      ]
+    },
+    "record_id": {
+      "type": "string",
+      "pattern": "^conv_[A-Za-z0-9_-]+$"
+    },
+    "label_source": {
+      "type": "string",
+      "minLength": 1
+    },
+    "rubric_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "fixture": {
+      "type": "boolean"
+    },
+    "illustrative": {
+      "type": "boolean"
+    },
+    "data_origin": {
+      "enum": [
+        "real",
+        "illustrative",
+        "fixture",
+        "synthetic"
+      ]
+    },
+    "parent_record_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "required": [
+    "case_id",
+    "kind",
+    "source_text",
+    "variant_text",
+    "change_type",
+    "possibly_affected_dimensions",
+    "rationale",
+    "expert_validated",
+    "schema_version",
+    "namespace",
+    "study_id",
+    "record_id",
+    "evidence_class",
+    "label_source",
+    "rubric_version",
+    "fixture",
+    "illustrative",
+    "data_origin",
+    "parent_record_ids"
+  ],
+  "additionalProperties": false
+}

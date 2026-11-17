@@ -1,0 +1,59 @@
+{
+  "type": "object",
+  "properties": {
+    "addition_checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "candidate_acu_id": {
+            "type": "string"
+          },
+          "claim_family_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "status": {
+            "enum": [
+              "valid_added",
+              "invalid_added",
+              "unverified_added",
+              "not_new"
+            ]
+          },
+          "existing_acu_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "evidence_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "reason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "candidate_acu_id",
+          "claim_family_ids",
+          "status",
+          "existing_acu_id",
+          "evidence_ids",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "addition_checks"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

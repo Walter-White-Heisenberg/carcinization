@@ -1,0 +1,56 @@
+{
+  "type": "object",
+  "properties": {
+    "checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "question_id": {
+            "type": "string"
+          },
+          "baseline_in_scope": {
+            "type": "boolean"
+          },
+          "answer_correct": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "supported_in_text": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "anchor_state": {
+            "enum": [
+              "retained_equivalent",
+              "missing",
+              "changed",
+              "uncertain"
+            ]
+          },
+          "reason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "question_id",
+          "baseline_in_scope",
+          "answer_correct",
+          "supported_in_text",
+          "anchor_state",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "checks"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

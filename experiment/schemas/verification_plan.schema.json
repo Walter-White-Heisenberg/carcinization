@@ -1,0 +1,61 @@
+{
+  "type": "object",
+  "properties": {
+    "plans": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "claim_id": {
+            "type": "string"
+          },
+          "verification_type": {
+            "enum": [
+              "literature",
+              "numeric",
+              "execution",
+              "proof",
+              "expert"
+            ]
+          },
+          "required_artifacts": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "expected_observation": {
+            "type": "string"
+          },
+          "contradicting_observation": {
+            "type": "string"
+          },
+          "budget": {
+            "type": "string"
+          },
+          "unavailable_reason": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "claim_id",
+          "verification_type",
+          "required_artifacts",
+          "expected_observation",
+          "contradicting_observation",
+          "budget",
+          "unavailable_reason"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "plans"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

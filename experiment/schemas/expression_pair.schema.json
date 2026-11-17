@@ -1,0 +1,57 @@
+{
+  "type": "object",
+  "properties": {
+    "anchor_coverage": {
+      "type": "array",
+      "items": {}
+    },
+    "dimensions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "dimension": {
+            "enum": [
+              "coherence",
+              "referential_clarity",
+              "terminology_consistency",
+              "definition_order",
+              "unnecessary_repetition"
+            ]
+          },
+          "judgment": {
+            "enum": [
+              "A_better",
+              "B_better",
+              "tie",
+              "uncertain"
+            ]
+          },
+          "evidence_a": {
+            "type": "string"
+          },
+          "evidence_b": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "dimension",
+          "judgment",
+          "evidence_a",
+          "evidence_b",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "anchor_coverage",
+    "dimensions"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

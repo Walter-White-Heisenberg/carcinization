@@ -1,0 +1,36 @@
+{
+  "type": "object",
+  "properties": {
+    "readiness_category": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5
+    },
+    "reasons": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "locations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "uncertainties": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "readiness_category",
+    "reasons",
+    "locations",
+    "uncertainties"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}
