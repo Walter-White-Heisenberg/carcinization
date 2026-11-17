@@ -1,0 +1,944 @@
+{
+  "version": "2.3",
+  "metrics": [
+    {
+      "id": "S01",
+      "name": "轨迹间功能结构差异 D",
+      "tier": "primary",
+      "scope": "A/B，分别计算",
+      "unit": "论文×组别×轮次",
+      "formula": "d(x,y)=Levenshtein(x,y)/max(len(x),len(y)); D=2/[K(K-1)] Σ(i<j)d(S_i,S_j), K=3",
+      "inputs": [
+        "全部正文功能序列；主要t0/T为盲化双人核验标签；自动全曲线单列"
+      ],
+      "edge_rules": "有效序列不得为空；标题不入序列，连续角色不折叠；K不足3不静默改分母。D∈[0,1]。",
+      "interpretation": "变小表示该功能表示下跨轨迹更像；不表示质量下降。",
+      "references": [],
+      "implementation": "reference_metrics.normalized_edit / mean_pairwise_edit",
+      "registered_components": [
+        "D"
+      ]
+    },
+    {
+      "id": "S02",
+      "name": "组内跨轨迹收缩 C",
+      "tier": "primary",
+      "scope": "A主/B探索",
+      "unit": "论文先汇总后均值",
+      "formula": "C_p,g=D_p,g,0-D_p,g,10; C_g=mean_p C_p,g",
+      "inputs": [
+        "S01 t0,t10"
+      ],
+      "edge_rules": "C∈[-1,1]；D0=0保留且标初始同形；缺失末轮、D0已知时C∈[D0-1,D0]。",
+      "interpretation": "正数为相对起点收缩，负数为扩张。",
+      "references": [],
+      "implementation": "reference_metrics.contraction",
+      "registered_components": [
+        "C"
+      ]
+    },
+    {
+      "id": "S03",
+      "name": "相对独立对照的额外收缩 ΔC",
+      "tier": "primary",
+      "scope": "A；B仅工作流差异",
+      "unit": "配对论文",
+      "formula": "ΔC_p=C_p,loop-C_p,ind; A共享D0时= D_p,ind,10-D_p,loop,10; 总体取论文均值",
+      "inputs": [
+        "两组S02及共享基线身份"
+      ],
+      "edge_rules": "一般范围[-2,2]；A共享D0范围[-1,1]。只有ΔC>0不足以叫趋同，还要C_loop>0。",
+      "interpretation": "递归协议相对独立采样的收缩差；不是权重演化。",
+      "references": [],
+      "implementation": "reference_metrics.extra_contraction / shared_baseline_bounds",
+      "registered_components": [
+        "delta_C"
+      ]
+    },
+    {
+      "id": "S04",
+      "name": "轨迹内相邻变化 W",
+      "tier": "diagnostic",
+      "scope": "A/B",
+      "unit": "论文×组别×轮次",
+      "formula": "W_t=1/K Σ_k d(S_k,t,S_k,t-1), K=3",
+      "inputs": [
+        "同轨迹相邻有效结构序列"
+      ],
+      "edge_rules": "缺任一相邻状态时主W=null；另报可用pair均值须带n_available，不默改1/K；不能插值。",
+      "interpretation": "W下降为逐步稳定，不能代替S01。",
+      "references": [],
+      "implementation": "reference_metrics.mean_adjacent_edit",
+      "registered_components": [
+        "distance"
+      ]
+    },
+    {
+      "id": "S05",
+      "name": "结构特征的逐项离散度",
+      "tier": "secondary",
+      "scope": "A/B",
+      "unit": "论文×特征×轮次",
+      "formula": "对标题数、单元数、列表比例、最大层级、各角色占比，分别计算 2/[K(K-1)]Σ|x_i-x_j|",
+      "inputs": [
+        "分块元数据"
+      ],
+      "edge_rules": "不把量纲不同的特征加权成总结构分；NA比例另报。",
+      "interpretation": "定位究竟是层级、数量还是篇幅分配趋同。",
+      "references": [],
+      "implementation": "reference_metrics.mean_absolute_pairwise",
+      "registered_components": [
+        "distance"
+      ]
+    },
+    {
+      "id": "S06",
+      "name": "同论文语义相似度 IntraSim",
+      "tier": "secondary",
+      "scope": "A/B",
+      "unit": "论文×组别×轮次",
+      "formula": "IntraSim=2/[K(K-1)]Σ cos(z_i,z_j)",
+      "inputs": [
+        "固定embedding模型及revision",
+        "无静默截断的文档向量"
+      ],
+      "edge_rules": "默认mpnet按256 word pieces无重叠切块，逐块单位化向量按内容token数加权平均后再单位化；块位置和实际长度存档。这是本设计适配，不等同M01原OpenAI编码。",
+      "interpretation": "语义/措辞混合基线；不能单独证明结构或判断趋同。",
+      "references": [
+        "M01",
+        "M31"
+      ],
+      "implementation": "reference_metrics.cosine；embedding需外部模型",
+      "registered_components": [
+        "similarity"
+      ]
+    },
+    {
+      "id": "S07",
+      "name": "跨论文语义相似度 InterSim",
+      "tier": "secondary",
+      "scope": "A/B，同模型同条件同轮",
+      "unit": "不同论文对",
+      "formula": "InterSim(p,q)=1/K² Σ_iΣ_j cos(z_p,i,z_q,j); 对所有p<q均值",
+      "inputs": [
+        "固定文档向量"
+      ],
+      "edge_rules": "主题和共有模板都会影响；不得和S06共用数值阈值。",
+      "interpretation": "跨论文通用化描述，不把题材接近当低质量。",
+      "references": [
+        "M01"
+      ],
+      "implementation": "reference_metrics.cosine",
+      "registered_components": [
+        "similarity"
+      ]
+    },
+    {
+      "id": "S08",
+      "name": "批评身份集合差异",
+      "tier": "secondary",
+      "scope": "A/B",
+      "unit": "两份审稿",
+      "formula": "d_J(A,B)=1-|A∩B|/|A∪B|",
+      "inputs": [
+        "人工校准的问题ID集合"
+      ],
+      "edge_rules": "A=B=空集时null并标both_no_issue；只一方空则1。新表述不自动新问题。",
+      "interpretation": "实质关注点差异，独立于结构及成立性。",
+      "references": [
+        "M03"
+      ],
+      "implementation": "reference_metrics.jaccard_distance",
+      "registered_components": [
+        "distance"
+      ]
+    },
+    {
+      "id": "S09",
+      "name": "片段特异性 ITF-IDF",
+      "tier": "optional",
+      "scope": "同条件同模型同轮的跨论文review池",
+      "unit": "每k各一个m=6的池",
+      "formula": "ITF-IDF=mean_j mean_i [ln(n_j/O_ij) ln(m/R_ij)]; O_ij=Σ_k I(sim(sij,skj)≥τ)sim; R_ij=Σ_l I(max_h sim(sij,shl)≥τ)max_h sim",
+      "inputs": [
+        "固定片段边界",
+        "片段向量",
+        "开发集冻结τ"
+      ],
+      "edge_rules": "每个k取每篇恰好一份review，形成3个m=6池，分别算后平均，不把同篇3轨迹混作跨论文；缺篇时不静默缩池。包括self=1；τ候选0.5，D校准并报0.4/0.6敏感性。",
+      "interpretation": "套话/重复的辅助指标，非质量真值。",
+      "references": [
+        "M03"
+      ],
+      "implementation": "reference_metrics.itf_idf；外部embedding",
+      "registered_components": [
+        "specificity"
+      ]
+    },
+    {
+      "id": "S10",
+      "name": "Vendi有效多样性",
+      "tier": "optional",
+      "scope": "同论文同轮，或另行定义的固定池",
+      "unit": "一组输出",
+      "formula": "VS=exp[-Σ λ_i ln λ_i], λ为PSD核矩阵K/n特征值，K_ii=1",
+      "inputs": [
+        "单位化向量的Gram矩阵，或已证明PSD的特征核"
+      ],
+      "edge_rules": "不能直接把1-编辑距离或任意judge相似度当PSD核；检查对称、对角线和最小特征值，小数误差仅在容差内裁剪。K=3时VS仅1至3，噪声大。",
+      "interpretation": "在指定核下的有效多样性，不是自动模板真实个数。",
+      "references": [
+        "M05"
+      ],
+      "implementation": "reference_metrics.vendi_score，纯PythonJacobi特征值",
+      "registered_components": [
+        "vendi"
+      ]
+    },
+    {
+      "id": "S11",
+      "name": "功能标题层级图 WL 相似度",
+      "tier": "optional",
+      "scope": "结构稳健性",
+      "unit": "文档图对",
+      "formula": "节点为heading与正文block，标签仅heading级别或role；边next/parent带方向；h=0,1,2的typed directed WL计数拼接φ，sim=cos(φ_i,φ_j)",
+      "inputs": [
+        "固定角色/标题层级图",
+        "h=2"
+      ],
+      "edge_rules": "特征由相同规范生成，邻域分别编码in/out和边类型；不使用段落语义。parent只编码标题包含关系，不编码列表父子层级，后者仅由S05描述。图为空则null。不是M20的GCN原样复现。",
+      "interpretation": "较功能序列多保留标题层级与邻接；仍需人工校准。",
+      "references": [
+        "M20",
+        "M24"
+      ],
+      "implementation": "reference_metrics.wl_features / feature_cosine",
+      "registered_components": [
+        "similarity"
+      ]
+    },
+    {
+      "id": "S12",
+      "name": "段落语义最优传输距离",
+      "tier": "optional",
+      "scope": "内容稳健性，不作结构主结果",
+      "unit": "文档对",
+      "formula": "min_π Σ_ij π_ij(1-cos(e_i,e_j))/2; π1=a,πᵀ1=b; 默认每段等质量a_i=1/n,b_j=1/m",
+      "inputs": [
+        "固定段落向量",
+        "明确的平衡OT求解器版本"
+      ],
+      "edge_rules": "普通OT忽略原顺序；语义重排可保持低距离。若用Sinkhorn需冻结正则/容差并标近似，不能混作原ASPIRE实现。",
+      "interpretation": "局部内容对应关系；不证明排列结构相同。",
+      "references": [
+        "M19"
+      ],
+      "implementation": "外部OT求解器，参考实现未提供求解器",
+      "registered_components": [
+        "distance"
+      ]
+    },
+    {
+      "id": "S13",
+      "name": "初始同形比例",
+      "tier": "diagnostic",
+      "scope": "A/B",
+      "unit": "论文",
+      "formula": "mean_p I(D_p,0=0)",
+      "inputs": [
+        "S01初始值"
+      ],
+      "edge_rules": "精确同形只对固定序列表示；不剔除、不过采样以制造差异。",
+      "interpretation": "说明可观察收缩空间及模型原有模板偏好。",
+      "references": [],
+      "implementation": "人工标注后按定义计算",
+      "registered_components": [
+        "initial_homogeneous",
+        "n_papers",
+        "rate"
+      ]
+    },
+    {
+      "id": "J01",
+      "name": "可判定批评准确率",
+      "tier": "secondary",
+      "scope": "审稿质量",
+      "unit": "review的去重问题",
+      "formula": "n_valid/(n_valid+n_invalid)",
+      "inputs": [
+        "问题成立性标注"
+      ],
+      "edge_rules": "uncertain/disputed单列；分母0为null，不得写100%；不存在G0中的新问题也可有效。",
+      "interpretation": "准确性，不能替代问题覆盖。",
+      "references": [
+        "M03"
+      ],
+      "implementation": "人工标注后按定义计算",
+      "registered_components": [
+        "valid",
+        "invalid",
+        "uncertain",
+        "disputed",
+        "precision",
+        "coverage"
+      ]
+    },
+    {
+      "id": "J02",
+      "name": "预标注重大缺陷召回",
+      "tier": "secondary",
+      "scope": "A主；B适用性分析另列",
+      "unit": "论文×review",
+      "formula": "A固定完整G0_major分母并报未知界限；B并列完整原始账本与条件区间[d/(e+u_n),(d+u_d)/(e+u_d)]，定义见§25.3。",
+      "inputs": [
+        "运行前冻结G0_major",
+        "主动提出的问题ID",
+        "B当前缺陷适用性"
+      ],
+      "edge_rules": "G0为空NA；e=0条件区间NA；unknown不直接删分母；B同时报已修复/不适用/unknown数。不可事后扩G0，不替代STOPPING冻结recall。",
+      "interpretation": "仅对已标注且仍适用缺陷的召回，不叫全部缺陷召回。",
+      "references": [],
+      "implementation": "v2_validation.fixed_major_recall / conditional_major_recall + 人工身份/适用性核验",
+      "registered_components": [
+        "found",
+        "fixed_n",
+        "unknown",
+        "lower",
+        "upper",
+        "evaluable",
+        "unknown_found",
+        "unknown_not_found",
+        "repaired",
+        "not_applicable"
+      ]
+    },
+    {
+      "id": "J03",
+      "name": "有效批评保留率",
+      "tier": "secondary",
+      "scope": "A；B需按适用性过滤",
+      "unit": "相邻review",
+      "formula": "|V_t,still_applicable ∩ I_t+1|/|V_t,still_applicable|",
+      "inputs": [
+        "已核验有效问题",
+        "后轮适用性"
+      ],
+      "edge_rules": "分母0为NA；B已修复的问题不得作为被遗忘；未出现不等于撤回。",
+      "interpretation": "有效判断是否持续，不是结构趋同条件。",
+      "references": [],
+      "implementation": "人工标注后按定义计算",
+      "registered_components": [
+        "retained",
+        "eligible",
+        "rate",
+        "unknown"
+      ]
+    },
+    {
+      "id": "J04",
+      "name": "无效批评持续率",
+      "tier": "secondary",
+      "scope": "A/B",
+      "unit": "相邻review",
+      "formula": "F_still={i∈F_t:在下一稿仍可确认无效}; persistence=|F_still∩I_t+1|/|F_still|",
+      "inputs": [
+        "当前已证无效问题身份",
+        "下一稿重新核验"
+      ],
+      "edge_rules": "原始F_t数量、后来成立和后来unknown分别报；分母0为NA。未知不是无效，变真不能仍算错误持续。",
+      "interpretation": "在连续可确认无效问题中的错误继承，不掩盖资格变化。",
+      "references": [],
+      "implementation": "人工标注后按定义计算",
+      "registered_components": [
+        "persisted",
+        "eligible",
+        "rate",
+        "became_valid",
+        "unknown"
+      ]
+    },
+    {
+      "id": "J05",
+      "name": "新增问题与返回问题",
+      "tier": "exploratory",
+      "scope": "A/B",
+      "unit": "轨迹×轮次",
+      "formula": "new=I_t\\union_{s<t}I_s; returned=(I_t∩union_{s<t-1}I_s)\\I_t-1",
+      "inputs": [
+        "全轨迹主动问题ID"
+      ],
+      "edge_rules": "t0只报initial；t1 returned=0。撤回不进入I_t；集合基于核心诊断，不用新句子数代替。",
+      "interpretation": "批评变化动态；不要求新问题更好。",
+      "references": [],
+      "implementation": "人工标注后按定义计算",
+      "registered_components": [
+        "new",
+        "returned",
+        "initial"
+      ]
+    },
+    {
+      "id": "J06",
+      "name": "无充分依据的判断反转",
+      "tier": "exploratory",
+      "scope": "固定P优先",
+      "unit": "问题×相邻时点",
+      "formula": "机会集O={同一注册ID两轮均有明确立场或严重性且身份/依据可评估}; unsupported_reversal_count/|O|",
+      "inputs": [
+        "立场",
+        "severity",
+        "rationale",
+        "专家核验"
+      ],
+      "edge_rules": "明确否定也在O中，不能仅取两轮active交集；缺席、身份不明、依据不可评估分别报排除数；合理新增依据不算无据反转。",
+      "interpretation": "评审标准移动的候选，不能只由分数变化判定。",
+      "references": [],
+      "implementation": "人工标注后按定义计算",
+      "registered_components": [
+        "reversed",
+        "opportunities",
+        "rate",
+        "excluded",
+        "unknown"
+      ]
+    },
+    {
+      "id": "Q11",
+      "name": "已知错误的修复及删除",
+      "tier": "secondary",
+      "scope": "Q1正确性",
+      "unit": "原始核验错误ID",
+      "formula": "分别计 repaired / removed / remaining / unassessable；repair_rate=n_repaired/n_initial_confirmed_error",
+      "inputs": [
+        "初始已证错误",
+        "跨版本映射"
+      ],
+      "edge_rules": "删除不计修复；初始错误为0时repair_rate=null；不把原稿所有内容当真值。 作者事实覆盖按生成前双人covered/uncovered/uncertain分层，固定各层分母；审稿增量解释只限uncovered，见§25.4。",
+      "interpretation": "可核验改进的类型，不合成总质量。",
+      "references": [
+        "M06",
+        "M15"
+      ],
+      "implementation": "人工标注后按定义计算",
+      "registered_components": [
+        "repaired",
+        "removed",
+        "remaining",
+        "unassessable",
+        "initial_confirmed_error",
+        "repair_rate",
+        "lower",
+        "upper"
+      ]
+    },
+    {
+      "id": "Q12",
+      "name": "新引入 新发现错误及核验覆盖",
+      "tier": "secondary",
+      "scope": "Q1正确性",
+      "unit": "版本×稳定主张族",
+      "formula": "分别计newly_introduced_error、newly_detected_preexisting_error、origin_unknown；verified_count/audited_count及unverified另报",
+      "inputs": [
+        "所有当前及新增主张",
+        "独立证据",
+        "跨版本claim_family与scope_variant"
+      ],
+      "edge_rules": "初稿未核验、后稿才证错不能叫新引入；需证据确认此前不存在/正确。各影响类别分别列，不加权相抵。 作者事实覆盖按生成前双人covered/uncovered/uncertain分层，固定各层分母；审稿增量解释只限uncovered，见§25.4。",
+      "interpretation": "区分改稿造错与后续才发现旧错。",
+      "references": [
+        "M06",
+        "M15"
+      ],
+      "implementation": "人工标注后按定义计算",
+      "registered_components": [
+        "newly_introduced_error",
+        "newly_detected_preexisting_error",
+        "origin_unknown",
+        "verified_count",
+        "audited_count",
+        "unverified",
+        "coverage",
+        "lower",
+        "upper"
+      ]
+    },
+    {
+      "id": "Q21",
+      "name": "主张证据状态分布",
+      "tier": "secondary",
+      "scope": "Q2证据匹配",
+      "unit": "claim_family+scope_variant",
+      "formula": "分别计 supported/partially_supported/insufficient_support/contradicted/unassessable；逐主张族和范围变体记录转移",
+      "inputs": [
+        "当前主张",
+        "证据包",
+        "scope",
+        "P29身份映射"
+      ],
+      "edge_rules": "删主张单列；范围改变不能冒充同一命题被补证据；不能仅报支持比例奖励空洞化。",
+      "interpretation": "主张是否超出可提供证据。",
+      "references": [
+        "M07",
+        "M08",
+        "M14",
+        "M15"
+      ],
+      "implementation": "人工标注后按定义计算",
+      "registered_components": [
+        "supported",
+        "partially_supported",
+        "insufficient_support",
+        "contradicted",
+        "unassessable",
+        "total"
+      ]
+    },
+    {
+      "id": "Q22",
+      "name": "自动文档支持得分",
+      "tier": "auxiliary",
+      "scope": "Q2的机器近似",
+      "unit": "证据-原子主张对",
+      "formula": "保存MiniCheck/AlignScore原始输出，不跨模型直接平均；阈值在D冻结",
+      "inputs": [
+        "版本固定的模型",
+        "证据片段及定位"
+      ],
+      "edge_rules": "低分不自动false，高分不自动科学真实；检索遗漏与核验失败分开；按论文区组盲测校准。",
+      "interpretation": "扩大筛查规模的辅助工具。",
+      "references": [
+        "M07",
+        "M08"
+      ],
+      "implementation": "官方模型；不在本包自动下载安装",
+      "registered_components": [
+        "minicheck_raw_score",
+        "alignscore_raw_score"
+      ]
+    },
+    {
+      "id": "Q31",
+      "name": "必要信息状态与覆盖",
+      "tier": "secondary",
+      "scope": "Q3完整性",
+      "unit": "预定必要信息项",
+      "formula": "各状态计数；sufficient_count/applicable_assessable_count，另列partial/missing/NA/unknown",
+      "inputs": [
+        "按论文类型冻结清单",
+        "当前范围",
+        "证据位置"
+      ],
+      "edge_rules": "NA须原因；因删主张转NA单列；未知占比一起报。附录迁移不算缺失。",
+      "interpretation": "对当前科学主张的必要信息完整性。",
+      "references": [
+        "M16"
+      ],
+      "implementation": "人工标注后按定义计算",
+      "registered_components": [
+        "sufficient",
+        "partial",
+        "missing",
+        "not_applicable",
+        "unknown",
+        "applicable_assessable",
+        "coverage",
+        "lower",
+        "upper"
+      ]
+    },
+    {
+      "id": "Q32",
+      "name": "固定问题信息覆盖",
+      "tier": "auxiliary",
+      "scope": "Q3/Q4的QA近似",
+      "unit": "生成前冻结问题集",
+      "formula": "有稿件证据且语义正确回答的固定问题数/N_fixed_baseline；模型答出但无证据单列",
+      "inputs": [
+        "专家核实的固定问答",
+        "P20公开题目投影",
+        "P21私有金答案核验"
+      ],
+      "edge_rules": "分母生成前冻结；missing/changed/错误/不支持不因删除退出分母；unknown单列并可给上下界。P20绝不见gold_answer等答案字段。",
+      "interpretation": "QA式原始锚定信息覆盖，非所有科学完整性。",
+      "references": [
+        "M09",
+        "M26",
+        "M27"
+      ],
+      "implementation": "官方QAEval可作基线；自定义长稿QA流程标adapted",
+      "registered_components": [
+        "covered",
+        "fixed_n",
+        "unknown",
+        "lower",
+        "upper"
+      ]
+    },
+    {
+      "id": "Q41",
+      "name": "有效科学内容保留",
+      "tier": "secondary",
+      "scope": "Q4内容",
+      "unit": "初始已核实ACU",
+      "formula": "确认完整保留比例=retained/N_original_verified；另列narrowed/omitted/distorted/unassessable；保留界限=[retained/N,(retained+unassessable)/N]",
+      "inputs": [
+        "核验后的原子科学内容",
+        "范围/否定/条件"
+      ],
+      "edge_rules": "同义重复不增加分母；unknown不当丢失；删无依据宣传不计有效内容损失；N=0为NA。",
+      "interpretation": "稿件确认保留了多少既有有效信息，不等于创新性。",
+      "references": [
+        "M10",
+        "M11"
+      ],
+      "implementation": "人工标注后按定义计算",
+      "registered_components": [
+        "retained",
+        "fixed_n",
+        "narrowed",
+        "omitted",
+        "distorted",
+        "unassessable",
+        "lower",
+        "upper"
+      ]
+    },
+    {
+      "id": "Q42",
+      "name": "有效新增与待核验新增",
+      "tier": "secondary",
+      "scope": "Q4内容",
+      "unit": "新增ACU",
+      "formula": "分别计valid_added/unverified_added/invalid_added，不与删除做加权净分",
+      "inputs": [
+        "新ACU",
+        "外部/执行/专家核验"
+      ],
+      "edge_rules": "没有新实验也可能有正确新推导；措辞细化不算新发现。",
+      "interpretation": "科学内容增补，不能仅凭模型自称贡献增加。",
+      "references": [
+        "M10",
+        "M15"
+      ],
+      "implementation": "人工标注后按定义计算",
+      "registered_components": [
+        "valid_added",
+        "invalid_added",
+        "unverified_added",
+        "total"
+      ]
+    },
+    {
+      "id": "Q43",
+      "name": "A2CU内容匹配原始输出",
+      "tier": "auxiliary",
+      "scope": "Q4机器近似",
+      "unit": "对齐的内容块对",
+      "formula": "保存官方recall/precision/F1及逐ACU匹配；本研究主要看固定已核验参考ACU覆盖",
+      "inputs": [
+        "AutoACU代码和权重revision",
+        "人工抽查"
+      ],
+      "edge_rules": "不把A3CU黑箱相似度说成逐项核验；长文需切块/检索并验证，原稿不是自动真值。",
+      "interpretation": "摘要方法适配后的覆盖辅助。",
+      "references": [
+        "M10"
+      ],
+      "implementation": "官方AutoACU，需要独立环境",
+      "registered_components": [
+        "recall",
+        "precision",
+        "f1",
+        "matched_acus",
+        "reference_acus"
+      ]
+    },
+    {
+      "id": "Q51",
+      "name": "固定锚定信息理解正确率",
+      "tier": "secondary",
+      "scope": "Q5表达",
+      "unit": "读者×固定题",
+      "formula": "冻结锚定题中当前仍可评估的题正确数/可评估题数；并报可评估题数/全部固定题数",
+      "inputs": [
+        "领域背景读者",
+        "生成前固定题与金答案",
+        "盲化版本"
+      ],
+      "edge_rules": "题库不随版本改；缺失归Q3/Q4并报覆盖，不能因删难题制造改善；每读者对同一论文只见一个版本。",
+      "interpretation": "固定可比内容上的条件理解表现，不是无条件全文表达总分。",
+      "references": [],
+      "implementation": "人工标注后按定义计算",
+      "registered_components": [
+        "correct",
+        "comparable",
+        "fixed_n",
+        "accuracy",
+        "coverage"
+      ]
+    },
+    {
+      "id": "Q52",
+      "name": "理解定位时间与澄清",
+      "tier": "secondary",
+      "scope": "Q5表达",
+      "unit": "读者×任务",
+      "formula": "分别报答题/定位时间分布与澄清次数；与Q51并列",
+      "inputs": [
+        "统一计时协议",
+        "读者日志"
+      ],
+      "edge_rules": "不以更快但错误称更好；不把只在答对样本的时间当无选择偏差总体速度。",
+      "interpretation": "读者理解成本。",
+      "references": [],
+      "implementation": "人工标注后按定义计算",
+      "registered_components": [
+        "answer_time",
+        "location_time",
+        "clarifications",
+        "respondents"
+      ]
+    },
+    {
+      "id": "Q53",
+      "name": "表达维度盲评与机器rubric",
+      "tier": "auxiliary",
+      "scope": "Q5表达",
+      "unit": "同义保留内容对",
+      "formula": "每个子维独立标A_better/B_better/tie/uncertain；AB/BA一致性另报",
+      "inputs": [
+        "连贯/指代/术语/定义顺序/冗余",
+        "对应文本证据"
+      ],
+      "edge_rules": "不合五维总分；随机顺序；模型判断与人类分开，不能以流畅推断科学正确。",
+      "interpretation": "局部表达变化；读者验证支持才作总体结论。",
+      "references": [
+        "M12",
+        "M13"
+      ],
+      "implementation": "人工标注后按定义计算",
+      "registered_components": [
+        "a_better",
+        "b_better",
+        "tie",
+        "uncertain",
+        "respondents"
+      ]
+    },
+    {
+      "id": "V01",
+      "name": "单元边界和角色一致性",
+      "tier": "validation",
+      "scope": "结构提取",
+      "unit": "盲标样本",
+      "formula": "边界匹配precision/recall/F1；对匹配block角色计算κ及逐类混淆，另列M/O比例",
+      "inputs": [
+        "两位独立标注者",
+        "冻结分割规则"
+      ],
+      "edge_rules": "边界不一致时先报告边界误差，不能只在容易匹配的单元上宣称全体标签可靠。",
+      "interpretation": "结构表示的测量可靠性。",
+      "references": [],
+      "implementation": "人工标注后按定义计算",
+      "registered_components": [
+        "precision",
+        "recall",
+        "f1",
+        "kappa",
+        "matched_blocks",
+        "m_ratio",
+        "o_ratio"
+      ]
+    },
+    {
+      "id": "V02",
+      "name": "逐类自动核验性能",
+      "tier": "validation",
+      "scope": "每个质量任务分别",
+      "unit": "独立论文盲测",
+      "formula": "逐类precision/recall/F1、混淆矩阵、FPR=FP/(FP+TN)、FNR=FN/(FN+TP)",
+      "inputs": [
+        "自动输出",
+        "独立专家+证据标签"
+      ],
+      "edge_rules": "阳性定义提前冻结；unknown/abstain不当TN；分母0为null。核心全量与非核心抽样分别报；合并估计须纳入概率权重及论文聚类区间。",
+      "interpretation": "量化误报漏报；不能只用整体一致率。",
+      "references": [
+        "M11",
+        "M17"
+      ],
+      "implementation": "reference_metrics.classification_report",
+      "registered_components": [
+        "precision",
+        "recall",
+        "f1",
+        "fpr",
+        "fnr",
+        "coverage",
+        "count"
+      ]
+    },
+    {
+      "id": "V03",
+      "name": "人工类别一致性 κ",
+      "tier": "validation",
+      "scope": "每维/每标签单独",
+      "unit": "共同已判定样本",
+      "formula": "κ=(p_o-p_e)/(1-p_e)",
+      "inputs": [
+        "仲裁前独立标签"
+      ],
+      "edge_rules": "p_e=1记null；同时报原始一致率、类别分布、unknown；不设通用0.8合格线。",
+      "interpretation": "标注可重复性，不保证科学真值。",
+      "references": [],
+      "implementation": "reference_metrics.cohens_kappa",
+      "registered_components": [
+        "agreement",
+        "kappa",
+        "count"
+      ]
+    },
+    {
+      "id": "V04",
+      "name": "分条件测量误差",
+      "tier": "validation",
+      "scope": "轮次/组别/长度",
+      "unit": "独立盲测层",
+      "formula": "按预定义层分别计算V02与unknown比例，报告组间错误差及区间",
+      "inputs": [
+        "保密映射表仅分析时合并"
+      ],
+      "edge_rules": "自动标签分层误差仅辅助；主终点用全部人工端点。108份端点100%块覆盖、6/6论文可计算才报告完整pilot主均值；否则降为缺失界限/探索描述，见§25.2。",
+      "interpretation": "排查评估器随迭代产生的假趋势。",
+      "references": [],
+      "implementation": "人工标注后按定义计算",
+      "registered_components": [
+        "error",
+        "unknown",
+        "coverage",
+        "count",
+        "lower",
+        "upper"
+      ]
+    },
+    {
+      "id": "V05",
+      "name": "AB/BA及重复评估稳定性",
+      "tier": "validation",
+      "scope": "pairwise judge/读者任务",
+      "unit": "同一对文本",
+      "formula": "顺序交换后语义判定一致率；重复标注翻转率",
+      "inputs": [
+        "随机顺序",
+        "同一冻结评估器"
+      ],
+      "edge_rules": "不是让模型投票产生真值；翻转保留uncertain，不能挑有利顺序。",
+      "interpretation": "位置及随机波动诊断。",
+      "references": [
+        "M17",
+        "M18"
+      ],
+      "implementation": "人工标注后按定义计算",
+      "registered_components": [
+        "agreement",
+        "flip_rate",
+        "count"
+      ]
+    },
+    {
+      "id": "X01",
+      "name": "失败与终止状态",
+      "tier": "diagnostic",
+      "scope": "所有计划调用",
+      "unit": "调用/轨迹/论文",
+      "formula": "各失败状态数/计划数；terminal_no_issue比例另列",
+      "inputs": [
+        "原始停止原因",
+        "attempt"
+      ],
+      "edge_rules": "终止式有效审稿不等于空输出；失败不编码成结构相同。",
+      "interpretation": "选择性缺失及伪收缩风险。",
+      "references": [],
+      "implementation": "人工标注后按定义计算",
+      "registered_components": [
+        "count",
+        "rate",
+        "planned",
+        "terminal_no_issue"
+      ]
+    },
+    {
+      "id": "X02",
+      "name": "成本 长度和守则违例",
+      "tier": "diagnostic",
+      "scope": "A/B/C",
+      "unit": "调用及轨迹",
+      "formula": "输入/输出/reasoning/cache token、耗时、费用、单元数；伪造实验/事实约束违例分别计数",
+      "inputs": [
+        "服务实际usage",
+        "核验记录"
+      ],
+      "edge_rules": "不可见usage为unknown；不拿调用数当严格计算量；提示禁止伪造仍需检测非遵循。",
+      "interpretation": "资源与行为边界，不纳入质量综合分。",
+      "references": [],
+      "implementation": "人工标注后按定义计算",
+      "registered_components": [
+        "input_tokens",
+        "output_tokens",
+        "reasoning_tokens",
+        "cache_read_tokens",
+        "cache_write_tokens",
+        "cost",
+        "elapsed_seconds",
+        "units",
+        "violations"
+      ]
+    },
+    {
+      "id": "X03",
+      "name": "结构扰动恢复",
+      "tier": "exploratory",
+      "scope": "C",
+      "unit": "预选论文×分支×后续步",
+      "formula": "分别画d(S_branch,u,S_pre)及d(S_perturb,u,S_keep,u)，u=0..3",
+      "inputs": [
+        "等内容扰动核验",
+        "原/扰动分支"
+      ],
+      "edge_rules": "恢复到同表示不等于恢复原批评或证明吸引子；每步检查内容变化。",
+      "interpretation": "区分结构继承与持续偏好。",
+      "references": [],
+      "implementation": "人工标注后按定义计算",
+      "registered_components": [
+        "distance_to_start",
+        "distance_to_keep",
+        "step"
+      ]
+    },
+    {
+      "id": "X04",
+      "name": "旁路整体认可度",
+      "tier": "optional",
+      "scope": "评分脱钩候选",
+      "unit": "论文版本",
+      "formula": "按P25固定rubric给1..5有序认可等级，单独记录，不与质量五维加总",
+      "inputs": [
+        "与循环隔离的评估器",
+        "正文证据"
+      ],
+      "edge_rules": "仅表征该评估器的认可；不是录用概率或科学真值。A/B顺序随机、人工抽查。",
+      "interpretation": "用于探索认可与其他维度是否脱钩。",
+      "references": [
+        "M01",
+        "M12"
+      ],
+      "implementation": "人工标注后按定义计算",
+      "registered_components": [
+        "ordinal_rating",
+        "count"
+      ]
+    }
+  ],
+  "namespace": "CONVERGENCE",
+  "evidence_class": "engineering_validation"
+}
