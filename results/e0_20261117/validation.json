@@ -1,0 +1,10 @@
+{
+  "evidence_class": "engineering_validation",
+  "public_offline_tests_passed": 36,
+  "source_verification_checks_passed": 203,
+  "new_real_api_calls": 0,
+  "recomputed_review_sequences": 15,
+  "recomputed_retention_fractions": 4,
+  "independent_human_review": false,
+  "checks_are_not_scientific_validation": true
+}
