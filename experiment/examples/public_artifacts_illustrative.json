@@ -1,0 +1,20 @@
+{
+  "namespace": "CONVERGENCE",
+  "evidence_class": "engineering_validation",
+  "fixture": true,
+  "illustrative": true,
+  "artifacts": {
+    "conv_demo_paper": {
+      "record_id": "conv_demo_paper",
+      "paper_id": "DEMO_PAPER",
+      "artifact_kind": "fixed_manuscript_source",
+      "document_kind": "manuscript",
+      "kind": "manuscript",
+      "text": "Illustrative fixed manuscript.",
+      "raw_text": "Illustrative fixed manuscript.",
+      "sha256": "ca7c28d838a242d81efeb81fe7e1aecea800c7aa7eedcc23753cc9f95b480b59",
+      "approved_for_generation": true,
+      "private": false
+    }
+  }
+}

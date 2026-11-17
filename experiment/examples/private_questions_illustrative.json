@@ -1,0 +1,24 @@
+{
+  "illustrative": true,
+  "questions": [
+    {
+      "question_id": "Q001",
+      "question": "What batch size was used on D?",
+      "task": "understanding",
+      "gold_answer": "32",
+      "acceptable_variants": [
+        "a batch size of 32"
+      ],
+      "anchor_acu_ids": [
+        "ACU01"
+      ],
+      "evidence_ids": [
+        "E01"
+      ]
+    }
+  ],
+  "namespace": "CONVERGENCE",
+  "evidence_class": "engineering_validation",
+  "fixture": true,
+  "data_origin": "illustrative"
+}
