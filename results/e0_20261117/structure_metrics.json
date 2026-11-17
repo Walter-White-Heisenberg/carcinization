@@ -1,0 +1,155 @@
+{
+  "evidence_class": "diagnostic_only",
+  "n_papers": 1,
+  "human_endpoint_status": "not_performed",
+  "curves": [
+    {
+      "round": 0,
+      "expected_trajectories": 3,
+      "label_source": "automatic_P00E_P09_same_frozen_model",
+      "human_verified": false,
+      "available_loop": 3,
+      "D_loop": 0.47753530166880614,
+      "pairs_loop": [
+        {
+          "left": 1,
+          "right": 2,
+          "distance": 0.4878048780487805
+        },
+        {
+          "left": 1,
+          "right": 3,
+          "distance": 0.5789473684210527
+        },
+        {
+          "left": 2,
+          "right": 3,
+          "distance": 0.36585365853658536
+        }
+      ],
+      "available_independent": 3,
+      "D_independent": 0.47753530166880614,
+      "pairs_independent": [
+        {
+          "left": 1,
+          "right": 2,
+          "distance": 0.4878048780487805
+        },
+        {
+          "left": 1,
+          "right": 3,
+          "distance": 0.5789473684210527
+        },
+        {
+          "left": 2,
+          "right": 3,
+          "distance": 0.36585365853658536
+        }
+      ],
+      "C_loop": 0.0,
+      "C_independent": 0.0,
+      "delta_C": 0.0,
+      "measurement_floor": false,
+      "missing_reason": null
+    },
+    {
+      "round": 1,
+      "expected_trajectories": 3,
+      "label_source": "automatic_P00E_P09_same_frozen_model",
+      "human_verified": false,
+      "available_loop": 3,
+      "D_loop": 0.32036391792489355,
+      "pairs_loop": [
+        {
+          "left": 1,
+          "right": 2,
+          "distance": 0.2619047619047619
+        },
+        {
+          "left": 1,
+          "right": 3,
+          "distance": 0.36585365853658536
+        },
+        {
+          "left": 2,
+          "right": 3,
+          "distance": 0.3333333333333333
+        }
+      ],
+      "available_independent": 3,
+      "D_independent": 0.353959222380275,
+      "pairs_independent": [
+        {
+          "left": 1,
+          "right": 2,
+          "distance": 0.34210526315789475
+        },
+        {
+          "left": 1,
+          "right": 3,
+          "distance": 0.3684210526315789
+        },
+        {
+          "left": 2,
+          "right": 3,
+          "distance": 0.35135135135135137
+        }
+      ],
+      "C_loop": 0.1571713837439126,
+      "C_independent": 0.12357607928853115,
+      "delta_C": 0.03359530445538145,
+      "measurement_floor": false,
+      "missing_reason": null
+    },
+    {
+      "round": 2,
+      "expected_trajectories": 3,
+      "label_source": "automatic_P00E_P09_same_frozen_model",
+      "human_verified": false,
+      "available_loop": 3,
+      "D_loop": 0.3104575163398693,
+      "pairs_loop": [
+        {
+          "left": 1,
+          "right": 2,
+          "distance": 0.3333333333333333
+        },
+        {
+          "left": 1,
+          "right": 3,
+          "distance": 0.2647058823529412
+        },
+        {
+          "left": 2,
+          "right": 3,
+          "distance": 0.3333333333333333
+        }
+      ],
+      "available_independent": 3,
+      "D_independent": 0.35511191772534784,
+      "pairs_independent": [
+        {
+          "left": 1,
+          "right": 2,
+          "distance": 0.27586206896551724
+        },
+        {
+          "left": 1,
+          "right": 3,
+          "distance": 0.42105263157894735
+        },
+        {
+          "left": 2,
+          "right": 3,
+          "distance": 0.3684210526315789
+        }
+      ],
+      "C_loop": 0.16707778532893686,
+      "C_independent": 0.12242338394345831,
+      "delta_C": 0.04465440138547855,
+      "measurement_floor": false,
+      "missing_reason": null
+    }
+  ],
+  "interpretation_limit": "Two updates test chain and measurement feasibility; no long-run convergence or hypothesis rejection claim."
+}

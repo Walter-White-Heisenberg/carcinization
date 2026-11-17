@@ -1,0 +1,24 @@
+{
+  "source_run_id": "e0_20261117_gpt61_default_001",
+  "source_manuscript": "https://arxiv.org/pdf/1706.03762v1",
+  "source_manuscript_sha256": "d3eeba7551414b66edb920fae44f6a83e60d963e772b833b68c3942556111084",
+  "frozen_record_sha256": "646079af7ac40da717e08186eaad6e4f3978d6c7532030d3e4d6ab85c84abbbc",
+  "model": "gpt-6.1-sol",
+  "provider": "openai",
+  "sampling": "provider_default_v1",
+  "model_revision_precision": "published_alias_immutable_revision_not_exposed",
+  "generations": 15,
+  "structurally_annotated_reviews": 15,
+  "updates": 2,
+  "papers": 1,
+  "human_annotations": 0,
+  "cumulative_historical_conservative_committed_usd": 3.0899850000000004,
+  "invoice_verified": false,
+  "raw_request_response_archive_included": false,
+  "recomputation_scope": "Functional-sequence distances and contraction. Raw review-to-label validity and source-audit judgments require the separate research archive.",
+  "files": {
+    "structure_sequences.json": "6047a62142a3c6b6763f7c421157dd9efeca9fcbbdd7922fd36b3e950d4bf728",
+    "structure_metrics.json": "602b1f622e1eb82fe5536dda09dfd9bf6b34357378724257be27736a18fe542a",
+    "quality_summary.json": "a71b2c98ff2792fef251a048087b543a2d593577512194e0cb86ea2bdde0db48"
+  }
+}
