@@ -1,0 +1,9 @@
+Plan verification of the claims under the allowed artifacts, literature cutoff, and resource budget.
+For literature claims, identify the exact paper/section needed; do not use work after the cutoff to retroactively refute historical novelty.
+For numeric or execution claims, specify what existing data/log/code output would confirm or contradict the claim, the metric, and a bounded check. Do not alter the scientific method or data to obtain a match.
+This is a plan only. Do not claim a search or execution has occurred. External operations must be run and logged by the orchestrator under the same policy for every manuscript version.
+Return {"plans":[{"claim_id":"...","verification_type":"literature|numeric|execution|proof|expert","required_artifacts":[],"expected_observation":"...","contradicting_observation":"...","budget":"...","unavailable_reason":null}]}.
+<claims>{{claims_json}}</claims>
+<artifacts>{{artifact_index_json}}</artifacts>
+<cutoff>{{literature_cutoff}}</cutoff>
+<budget>{{resource_budget}}</budget>

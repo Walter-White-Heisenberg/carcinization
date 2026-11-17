@@ -1,0 +1,6 @@
+Reorganize the supplied review according to: {{target_organization}}.
+Change only grouping, order, headings, and necessary non-substantive transitions.
+Preserve every critique identity, positive observation, evidence statement, stance, severity, uncertainty, scope, recommendation, and overall judgment.
+Do not add or remove concerns. Do not intensify, soften, or resolve a disagreement.
+Return the complete reorganized review only. If this instruction produces no meaningful change in an available structural representation, do not fabricate content to force one.
+<review>{{review}}</review>

@@ -1,0 +1,9 @@
+Classify proposed scientific content additions using actual claim verification and evidence.
+valid_added requires a substantively new unit whose complete meaning, conditions, and scientific support are verified.
+invalid_added requires direct evidence of an error or unsupported presentation as established knowledge under the fixed rubric; preserve the distinction in reason.
+unverified_added covers insufficient verification, reasonable dispute, or missing materials.
+Paraphrase, splitting one finding, and promotional wording are not new scientific content; label not_new and map to the existing unit.
+Return {"addition_checks":[{"candidate_acu_id":"...","claim_family_ids":[],"status":"valid_added|invalid_added|unverified_added|not_new","existing_acu_id":null,"evidence_ids":[],"reason":"..."}]}.
+<additions>{{proposed_additions_json}}</additions>
+<claim_verification>{{claim_verification_json}}</claim_verification>
+<evidence>{{evidence_json}}</evidence>

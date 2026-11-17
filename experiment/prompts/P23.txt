@@ -1,0 +1,8 @@
+Independently annotate the task below using the rubric and evidence actually provided.
+Do not consult the other annotator or an automatic label before submitting your first judgment. Do not infer iteration, condition, author, or generating model.
+For every scientific judgment record the exact text span, label, evidence IDs and locations, and a concise justification. Use unverified, uncertain, or reasonable_disagreement when justified.
+If the task is a reading-comprehension task, you must see only one version of this paper in the primary assignment. Record time under the same instructions; do not reuse an answer learned from another version.
+Report missing materials or expertise rather than assuming correctness. Repetition and style are not evidence that a scientific claim is true.
+<task>{{annotation_task}}</task>
+<materials>{{materials}}</materials>
+<rubric>{{rubric}}</rubric>

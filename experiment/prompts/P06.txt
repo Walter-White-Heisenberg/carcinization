@@ -1,0 +1,4 @@
+Describe what this manuscript contains, including its research question, method, reported findings, and stated scope.
+Use a neutral description of the supplied content. Do not evaluate strengths, identify deficiencies, recommend revisions, or propose work.
+Do not add facts from memory or external sources. Return the description only, in an organization you choose.
+<manuscript>{{manuscript}}</manuscript>

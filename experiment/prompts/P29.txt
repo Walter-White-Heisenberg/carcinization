@@ -1,0 +1,8 @@
+Map local candidate claim IDs to stable scientific claim families using the source texts.
+Distinguish same_proposition (paraphrase with equivalent scope and certainty), scope_variant (same scientific question but changed range/conditions/quantifier/strength), new_proposition, and uncertain_match.
+Record claim_family_id and scope_variant_id. Do not merge claims just because their words are similar. Do not infer validity from registry membership.
+For a seemingly new claim, inspect the previous source text before asserting it was absent; extraction omission is not evidence that the claim is newly introduced.
+Return {"claim_matches":[{"local_claim_id":"...","claim_family_id":null,"scope_variant_id":null,"decision":"same_proposition|scope_variant|new_proposition|uncertain_match","previous_presence":"present|absent_after_check|unassessable","source_locations":[],"reason":"..."}]}.
+<registry>{{claim_registry_json}}</registry>
+<candidates>{{candidate_claims_json}}</candidates>
+<source_texts>{{source_texts}}</source_texts>

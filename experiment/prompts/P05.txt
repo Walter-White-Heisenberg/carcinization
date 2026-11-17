@@ -1,0 +1,8 @@
+Examine the manuscript and make any revisions you judge necessary to improve its scientific communication and argumentation.
+Choose the organization and changes yourself. Do not force a revision when none is justified.
+You may clarify, reorganize, or qualify unsupported claims while remaining faithful to completed research.
+Do not add unperformed experiments, invented results, proofs, or references.
+Return the complete manuscript only; if no change is warranted, return it unchanged.
+
+<manuscript>{{manuscript}}</manuscript>
+<completed_research_facts>{{fact_constraints}}</completed_research_facts>

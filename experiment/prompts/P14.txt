@@ -1,0 +1,7 @@
+Verify each claim within this explicit scope: {{verification_scope}}.
+Use only the supplied evidence and actual verification results. Source manuscript consistency alone does not prove real-world experimental truth.
+Labels: verified_correct requires adequate supporting verification in this scope; verified_error requires a direct contradiction, calculation error, counterexample, or invalid inference; unverified covers missing evidence or inability to decide.
+Do not equate unsupported with false. Preserve reasonable disputes as unverified with reason=reasonable_disagreement.
+Return {"judgments":[{"claim_id":"...","label":"verified_correct|verified_error|unverified","verification_level":"internal|external_literature|execution|formal_or_expert","evidence_ids":[],"exact_locations":[],"reason":"...","impact":"local|affects_key_result|blocks_core_claim|uncertain"}]}.
+<claims>{{claims_json}}</claims>
+<evidence>{{evidence_json}}</evidence>

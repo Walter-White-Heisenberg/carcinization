@@ -1,0 +1,13 @@
+Draft an auditable evidence ledger and necessary-information checklist for this paper type: {{paper_type}}.
+The original manuscript is not ground truth. Link each proposed verified fact, original defect, scientific content unit, and necessary information item to actual evidence or mark it unverified.
+For every necessary item state the retained claim/reproducibility task it supports and the concrete obstacle if missing. Do not demand every conceivable experiment.
+Return {"facts":[],"initial_defect_candidates":[],"scientific_unit_candidates":[],"necessary_items":[],"human_approval_required":true}.
+No candidate becomes part of G0 or the verified reference units until an identified human reviewer approves it against evidence.
+<manuscript>{{manuscript}}</manuscript>
+<evidence_index>{{evidence_index_json}}</evidence_index>
+Use the following exact fields for nonempty arrays:
+facts: item_id, statement, verification_status="unverified", evidence_ids, locations, reason.
+initial_defect_candidates: item_id, target, diagnosis, severity_candidate (major|minor|blocking|unknown), evidence_ids, locations, reason.
+scientific_unit_candidates: acu_id, content, type (method|finding|theory|counterexample|boundary|resource|other), source_quotes, conditions, verification_status="unverified".
+necessary_items: item_id, dependent_claim_ids, reproducibility_task, necessity_reason, acceptable_locations, applicability (applicable|not_applicable|uncertain), evidence_ids.
+Empty arrays are permitted when no defensible candidates exist; do not fabricate entries to fill a schema.

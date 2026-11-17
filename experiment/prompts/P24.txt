@@ -1,0 +1,10 @@
+Adjudicate this disagreement using the evidence and frozen rubric, not majority voting or a preference for a particular annotator.
+Retain the independent original annotations. Identify whether the disagreement comes from missing evidence, unit boundaries, scope interpretation, factual conflict, or a reasonable evaluative difference.
+If the evidence does not settle the issue, preserve uncertain/unverified/disputed instead of manufacturing consensus.
+Return {"unit_id":"...","resolution":null,"adjudicator_id":null,"human_approval_record_id":null,"disagreement_type":"...","evidence_ids":[],"reason":"...","requires_human_decision":true}.
+An assistant may propose a resolution, but the scientific arbitration record must name the actual human adjudicator or remain unresolved.
+<unit>{{unit}}</unit>
+<annotations>{{independent_annotations_json}}</annotations>
+<evidence>{{evidence_json}}</evidence>
+<rubric>{{rubric}}</rubric>
+A model-only proposal must keep resolution, adjudicator_id and human_approval_record_id null. Only the coordinator may attach an actually approved human resolution and its registry identity. Never invent a human approval.

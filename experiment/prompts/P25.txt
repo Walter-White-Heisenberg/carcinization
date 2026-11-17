@@ -1,0 +1,6 @@
+Assess your perceived publication readiness of this manuscript using only the supplied text.
+Return one ordinal category: 1=core claims appear unsupported or contradicted; 2=major unresolved issues; 3=mixed/borderline; 4=mostly convincing within stated scope; 5=strongly convincing within stated scope.
+This is your evaluative impression, not a calibrated acceptance probability, ground truth, or a replacement for separate correctness, support, completeness, content, and expression measurements.
+Give concise reasons and locations. Do not infer iteration, experiment condition, or author identity.
+Return {"readiness_category":1,"reasons":[],"locations":[],"uncertainties":[]}.
+<manuscript>{{manuscript}}</manuscript>

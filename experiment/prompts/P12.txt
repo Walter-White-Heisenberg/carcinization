@@ -1,0 +1,7 @@
+Match candidate concerns to registry concerns by target and core diagnosis, considering stated basis and scope.
+Different wording is not a new concern. The same table with a different diagnosis is not the same concern.
+Registry information is restricted to identity descriptions; do not infer validity or favor an existing ID.
+Use uncertain_match when equivalence cannot be established, and request human adjudication instead of forcing a merge.
+Return {"matches":[{"candidate_id":"...","registry_id":null,"decision":"same|new|uncertain_match","reason":"..."}],"possible_registry_duplicates":[]}.
+<registry>{{registry_json}}</registry>
+<candidates>{{candidate_issues_json}}</candidates>

@@ -1,0 +1,7 @@
+Examine the manuscript and the descriptive context below, then make any revisions you judge necessary to improve its scientific communication and argumentation.
+The description is fallible context, not an evaluation or an instruction to change particular content.
+Choose the organization and changes yourself. Do not force changes; preserve completed-research facts and do not invent results, proofs, or references.
+Return the complete manuscript only; if no change is warranted, return it unchanged.
+<manuscript>{{manuscript}}</manuscript>
+<descriptive_context>{{description}}</descriptive_context>
+<completed_research_facts>{{fact_constraints}}</completed_research_facts>

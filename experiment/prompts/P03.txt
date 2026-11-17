@@ -1,0 +1,12 @@
+Check whether the candidate preserves the scientific or review content of the original under this mode: {{check_mode}}.
+Modes: initial_variant requires all scientific content to remain equivalent; structure_perturbation requires all critique identities, evidence, stance, severity, scope, uncertainty, and recommendations to remain equivalent.
+Compare both directions to detect omissions and additions. Reordering may change coherence; do not require expression quality to be unchanged.
+Do not approve equivalence only because embeddings or vocabulary are similar.
+Return JSON:
+{"status":"equivalent|non_equivalent|uncertain", "changes":[{"kind":"omission|addition|distortion|scope_change|number_change|negation_change|stance_change|other","original_quote":"...","candidate_quote":null,"evidence":"..."}], "organization_changed":"yes|no|uncertain", "reason":"..."}.
+Organization_changed is descriptive and is not permission to resample until a desired structure appears. Human verification is required for experimental admission.
+
+<original>{{original_text}}</original>
+<candidate>{{candidate_text}}</candidate>
+<constraints>{{constraints}}</constraints>
+For each changes entry use source_location, candidate_location, change_type (content|organization|uncertain), and description, all strings.

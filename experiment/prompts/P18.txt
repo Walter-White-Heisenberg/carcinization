@@ -1,0 +1,8 @@
+Compare the independently verified reference scientific units to the candidate, preserving full semantic conditions.
+For each reference unit label retained, narrowed, omitted, distorted, or unassessable. Moving content or paraphrasing is retained if meaning and conditions remain.
+List candidate units with no equivalent reference unit as proposed_additions, initially unverified_added. You cannot certify a new scientific finding merely from the candidate's assertion.
+Deleting an unsupported promotional statement is not loss of a verified scientific unit.
+Return {"reference_matches":[{"reference_acu_id":"...","status":"...","candidate_ids":[],"candidate_locations":[],"reason":"..."}],"proposed_additions":[{"candidate_acu_id":"...","status":"unverified_added","reason":"..."}]}.
+<reference>{{reference_acus_json}}</reference>
+<candidate_acus>{{candidate_acus_json}}</candidate_acus>
+<candidate_text>{{candidate_text}}</candidate_text>

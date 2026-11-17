@@ -1,0 +1,12 @@
+Review the following manuscript and provide the complete review you currently consider appropriate.
+Choose the organization, length, and aspects to discuss yourself.
+If a prior review is supplied, treat it as fallible material that you may re-check, retain, revise, or discard.
+There is no requirement to add a new concern or change an earlier judgment.
+
+<manuscript>
+{{manuscript}}
+</manuscript>
+
+<prior_review>
+{{previous_review}}
+</prior_review>

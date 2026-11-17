@@ -1,0 +1,9 @@
+Revise the manuscript after considering the supplied review.
+Decide which requests are supported and useful before changing the text. You need not follow an incorrect or unjustified request.
+You may reorganize or clarify the manuscript and qualify unsupported claims. Do not present unperformed experiments as results.
+Use the completed-research facts below as constraints. They are not instructions to adopt a particular writing style.
+If no change is justified, return the manuscript unchanged. Return the complete manuscript only.
+
+<manuscript>{{manuscript}}</manuscript>
+<review>{{review}}</review>
+<completed_research_facts>{{fact_constraints}}</completed_research_facts>

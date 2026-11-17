@@ -1,0 +1,7 @@
+Independently annotate this document under the supplied segmentation and role guide. Do not view another annotator's labels before submitting your own.
+Flag boundary errors separately from role ambiguity. Do not rewrite the document to make it easier to annotate.
+For each block provide its ID, agreed boundary or exact correction, role, confidence, and a brief justification. Headings are metadata, not body-role tokens.
+Return {"boundary_corrections":[],"labels":[],"unresolved":[]}.
+<text>{{text}}</text>
+<blocks>{{blocks_json}}</blocks>
+<guide>{{role_guide}}</guide>

@@ -1,0 +1,10 @@
+Create one controlled variant for measurement validation, using change_type={{change_type}}.
+Allowed types: numeric_error, scope_expansion, necessary_information_deletion, verified_finding_deletion, meaning_preserving_paraphrase, content_preserving_reorder, style_edit, unchanged, negation_error.
+For negation_error, reverse exactly one designated negation while preserving other scientific content.
+For an error/deletion intervention change only the designated target as far as feasible; preserve other content. For paraphrase/reorder/style_edit preserve scientific meaning, conditions, and negation. unchanged returns the source verbatim.
+Do not assume only one quality dimension will change. Reordering may alter coherence. Do not provide an automatic ground-truth quality label.
+Return {"variant_text":"...","changed_spans":[{"start":0,"end":0,"source_text":"...","variant_text":"..."}],"change_description":"...","expected_targets":[],"human_verification_required":true}.
+The human validation vector must be established independently before using the case to select a metric.
+<source>{{source_text}}</source>
+<constraints>{{evidence_constraints}}</constraints>
+changed_spans offsets are Python Unicode-code-point offsets into source_text; use an empty list for unchanged.

@@ -1,0 +1,9 @@
+Compare expression of the fixed anchor information in texts A and B, without judging scientific novelty or overall publication quality.
+First check whether each anchor remains available with equivalent meaning in both. Missing or changed anchors are coverage/content changes, not pure expression improvements.
+For comparable information judge separately: coherence, referential clarity, terminology consistency, definition order, and unnecessary repetition.
+Each dimension uses A_better, B_better, tie, or uncertain and cites brief text evidence. Do not prefer a text solely for being longer, shorter, more confident, or more polished.
+Return {"anchor_coverage":[],"dimensions":[{"dimension":"...","judgment":"...","evidence_a":"...","evidence_b":"...","reason":"..."}]}.
+The orchestrator randomizes A/B and evaluates swapped order in the validation subset. This prompt must not receive condition or iteration metadata.
+<anchors>{{fixed_anchor_json}}</anchors>
+<A>{{text_a}}</A>
+<B>{{text_b}}</B>

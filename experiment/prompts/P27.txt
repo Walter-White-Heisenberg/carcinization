@@ -1,0 +1,8 @@
+Classify the output status for this task: {{task_kind}}.
+Use the actual provider finish reason. Never repair, complete, or rewrite the original output.
+An explicit complete review saying no concern was found is success with terminal_no_issue=true, not empty or refusal.
+Return {"status":"success|truncated|empty|refusal|off_task|parse_failure|uncertain","terminal_no_issue":false,"reason":"..."}.
+Provider/API/context errors are determined from logs rather than inferred from text. A human may adjudicate ambiguous status.
+The caller maps uncertain to the run-record status unresolved_status; it must never silently become success.
+<finish_reason>{{provider_finish_reason}}</finish_reason>
+<output>{{raw_output}}</output>

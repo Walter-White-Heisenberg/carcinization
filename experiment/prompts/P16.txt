@@ -1,0 +1,9 @@
+Check each predefined necessary information item against the current manuscript and actually accessible artifacts.
+Do not add a generic demand merely because some ideal paper might include it. Each item must specify the retained claim or reproducibility task it serves.
+Labels: sufficient, partial, missing, not_applicable, unassessable.
+Information relocated to an accessible appendix/table/code is not missing. If a removed claim makes an item not applicable, record reason=claim_removed and preserve the original denominator record.
+For missing, explain the concrete obstacle caused by the absence. Do not use author self-reported checklist answers without checking their evidence.
+Return {"items":[{"item_id":"...","status":"...","locations":[],"dependent_claim_ids":[],"obstacle_if_missing":null,"reason":"..."}]}.
+<items>{{items_json}}</items>
+<manuscript>{{manuscript}}</manuscript>
+<accessible_artifacts>{{accessible_artifacts_json}}</accessible_artifacts>

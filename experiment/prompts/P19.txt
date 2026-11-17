@@ -1,0 +1,8 @@
+Create a fixed question set to test understanding of the supplied verified anchor information by this target reader: {{target_reader}}.
+Questions must be answerable from the anchor information and evidence, with no requirement for new scientific judgment.
+Provide a gold answer, acceptable semantic variants, and exact evidence IDs for each question.
+Do not see or tailor questions to later manuscript versions. Do not ask trivial wording or formatting questions.
+Return {"questions":[{"question_id":"...","anchor_acu_ids":[],"question":"...","gold_answer":"...","acceptable_variants":[],"evidence_ids":[],"task":"understanding|location"}]}.
+Human reviewers must verify questions and freeze the set before generation begins.
+<anchors>{{anchor_acus_json}}</anchors>
+<evidence>{{evidence_json}}</evidence>

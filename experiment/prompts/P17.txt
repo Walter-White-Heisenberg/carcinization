@@ -1,0 +1,6 @@
+Extract semantically distinct scientific content units: method mechanisms, supported-or-claimed findings, theoretical results, counterexamples, boundary analyses, and resources.
+Preserve numbers, scope, negation, uncertainty, and conditions inside each unit. Do not count paraphrases or multiple sentences of the same finding as extra units.
+Extraction does not establish validity. Mark verification_status=unverified unless an independent supplied verification process later confirms it.
+Keep scientific content distinct from promotional claims such as important or groundbreaking.
+Return {"acus":[{"acu_id":"...","content":"...","type":"method|finding|theory|counterexample|boundary|resource|other","source_quotes":[],"conditions":[],"verification_status":"unverified"}]}.
+<manuscript>{{manuscript}}</manuscript>

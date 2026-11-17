@@ -1,0 +1,9 @@
+Label the provided pre-segmented blocks. Do not change, merge, split, drop, or reorder their boundaries or IDs.
+Only label blocks with annotation_target=true when this flag is present; neighboring context blocks have annotation_target=false and must not appear in the output labels.
+document_kind={{document_kind}}.
+For review body blocks use S=summary, P=positive evaluation, N=negative evaluation, Q=clarification request, A=action recommendation, V=overall judgment, M=mixed with no dominant function, O=other.
+For manuscript body blocks use I=problem/motivation, B=background/related work, M=method/definition, T=theory/proof, E=experimental design, R=results, D=discussion/limitations/future, X=mixed with no dominant function, O=other.
+Assign the dominant communicative function from meaning, not punctuation. A rhetorical question asserting a flaw may be N; an explicit action request may be A. Use mixed only when no primary function can be identified.
+Heading blocks have role=null; preserve their heading level and path. Role does not imply scientific correctness or review validity.
+Return {"document_kind":"...","labels":[{"block_id":"...","role":null,"confidence":"high|medium|low","reason":"brief functional evidence"}]}.
+<blocks>{{blocks_json}}</blocks>

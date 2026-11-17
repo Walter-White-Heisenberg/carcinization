@@ -1,0 +1,9 @@
+Extract distinct scientific review concerns, not every sentence.
+A concern is identified by its target, core diagnosis, and stated basis. Split two independently assessable diagnoses even if they occur in one sentence.
+Merge repeated expressions of the same concern within this review, while preserving all source spans and occurrence_count.
+Do not judge validity here. Do not turn a positive observation or a neutral summary into a concern.
+Record absence and withdrawal differently: withdrawal requires an explicit rejection of an earlier concern, not mere omission.
+Record active_concern=true only when the review currently raises the concern as a live objection or unresolved possibility; an explicit rejection/withdrawal is false, and ambiguous activity is null. Active is not the same as scientifically valid.
+Return {"issues":[{"local_id":"...","target":"...","diagnosis":"...","basis":"...","source_quotes":[],"manuscript_locations":[],"occurrence_count":1,"existence_stance":"exists|does_not_exist|not_stated","active_concern":true,"certainty":"possible|probable|asserted|not_stated","severity":"minor|major|blocking|not_stated","recommendation":null,"explicit_withdrawal":false}]}.
+<review>{{review}}</review>
+<manuscript>{{manuscript}}</manuscript>

@@ -1,0 +1,12 @@
+Assess each review concern against this exact current manuscript and the supplied evidence.
+The manuscript blind ID is {{manuscript_blind_id}}. Echo this exact ID in every output entry; never infer or invent it.
+valid: its factual premise and diagnostic argument are supported and it applies to the current manuscript.
+invalid: a material premise is directly contradicted, the diagnosis is demonstrably mistaken, or the demand is demonstrably irrelevant under the specified rubric.
+uncertain: evidence/expertise is insufficient to decide. disputed: multiple defensible evaluative standards remain despite adequate evidence.
+Do not infer validity from the reviewer's confidence, severity, formatting, model, or iteration. A question is not false merely because the answer is unavailable.
+Record current_applicability independently, and distinguish reviewer_claimed_severity from actual_impact assessed under the rubric.
+Return {"validity":[{"issue_id":"...","manuscript_blind_id":"...","label":"valid|invalid|uncertain|disputed","current_applicability":"applies|resolved|not_applicable|unassessable","actual_impact":"local|affects_key_result|blocks_core_claim|uncertain","evidence_ids":[],"locations":[],"reason":"..."}]}.
+<issues>{{issues_json}}</issues>
+<manuscript>{{manuscript}}</manuscript>
+<evidence>{{evidence_json}}</evidence>
+<rubric>{{validity_rubric}}</rubric>

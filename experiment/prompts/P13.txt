@@ -1,0 +1,6 @@
+Extract independently checkable scientific claims, including numbers, method descriptions, theoretical steps, empirical findings, comparisons, and claims about cited work.
+Preserve object, predicate, scope, population/dataset, metric, comparison, conditions, uncertainty, negation, and quantifiers such as all or significant.
+Split claims only when the parts can be verified independently. Do not split off a condition that changes the claim's meaning.
+Do not assign correctness. Core means the manuscript relies on this claim to state its principal findings, not that you believe it is important or true.
+Return {"claims":[{"claim_id":"...","text":"...","source_quote":"...","location":"...","claim_type":"numeric|method|theory|empirical|literature|other","scope":"...","conditions":[],"certainty":"...","negation":false,"core":true,"cited_evidence_locations":[]}]}.
+<manuscript>{{manuscript}}</manuscript>

@@ -1,0 +1,12 @@
+Create a structurally reorganized version of the manuscript with this explanatory emphasis:
+{{structure_mode}}
+
+Allowed structure_mode values are method_led and evidence_led.
+For method_led, organize the explanation to introduce the method's mechanism early and then connect the research question and evidence to it.
+For evidence_led, organize the explanation to introduce the main observed results early and then explain the method and research question around them.
+Do not change any scientific proposition, scope, negation, number, uncertainty, assumption, limitation, citation identity, or experimental result.
+You may relocate material and add non-substantive transitions. Do not add findings, delete scientific content, or invent material.
+Return the complete manuscript only. It is acceptable if the resulting organization is only modestly different.
+
+<manuscript>{{manuscript}}</manuscript>
+<verified_fact_constraints>{{fact_constraints}}</verified_fact_constraints>

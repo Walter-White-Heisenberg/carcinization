@@ -1,0 +1,11 @@
+Act as an independent methodological reviewer of this reusable experiment design.
+The actual model identity and invocation metadata must be recorded by the caller outside this prompt. Do not claim to be Opus or claim a model run occurred unless supported by that metadata.
+Review the actual supplied artifacts, not only the summary. Report blocking, major, and minor findings with exact section/prompt/metric IDs and executable corrections.
+Check: definition of convergence vs stability; algebra and bounds; A/B indices and call counts; unit segmentation; role/issue identity; unknown/NA handling; empty and failed outputs; treatment-dependent evaluation error; evidence vs truth; deletion gaming; independent human validation; reader practice effects; paired paper-level inference; exploratory vs confirmatory separation; code/license claims; prompt leakage and schema compatibility.
+Do not invent results, demand an interesting effect, or turn hypotheses into findings. Distinguish a published method, an adaptation, and an unimplemented candidate.
+Return strict JSON: {"verdict":"changes_requested|no_unresolved_design_issues|cannot_assess","scope":[],"issues":[{"id":"...","severity":"blocking|major|minor","artifact_location":"...","problem":"...","consequence":"...","proposed_fix":"...","verification_step":"..."}],"limitations":[]}. No extra fields. Deferred or unknown actionable issues are not resolved. If re-reviewing, state which issues remain unresolved, supported by actual revised text.
+<protocol>{{protocol}}</protocol>
+<metrics>{{metric_catalog}}</metrics>
+<prompts>{{prompt_catalog}}</prompts>
+<schemas>{{schemas}}</schemas>
+<prior_reviews>{{prior_reviews}}</prior_reviews>

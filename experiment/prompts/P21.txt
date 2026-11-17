@@ -1,0 +1,9 @@
+Evaluate each answer for both semantic correctness against the verified gold answer and actual support in the supplied manuscript.
+A correct fact guessed without manuscript evidence is not evidence of information coverage.
+Preserve separate fields baseline_in_scope, answer_correct, supported_in_text, and anchor_state. baseline_in_scope was frozen before generation and must not turn false merely because the candidate omitted or changed an anchor.
+For Q32 information coverage, use the entire fixed baseline-in-scope question set as denominator; missing, changed, incorrect, and unsupported answers are not excluded. For Q51 expression, only retained-equivalent anchors are comparable, and report that comparable coverage separately.
+Confirmed coverage requires anchor_state=retained_equivalent, answer_correct=true, and supported_in_text=true. A missing or changed anchor cannot simultaneously have confirmed equivalent text support. Uncertain labels must preserve coverage lower/upper bounds.
+Return {"checks":[{"question_id":"...","baseline_in_scope":true,"answer_correct":null,"supported_in_text":null,"anchor_state":"retained_equivalent|missing|changed|uncertain","reason":"..."}]}.
+<gold_questions>{{questions_with_gold_json}}</gold_questions>
+<answers>{{answers_json}}</answers>
+<manuscript>{{manuscript}}</manuscript>

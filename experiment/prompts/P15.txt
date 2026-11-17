@@ -1,0 +1,7 @@
+Assess whether the supplied evidence supports the exact scope, conditions, certainty, comparisons, and quantifiers of each claim.
+supported: adequate for the stated claim; partially_supported: supports a weaker/subset claim; insufficient_support: available examined evidence fails to establish the claim; contradicted: evidence opposes the claim; unassessable: necessary materials or expertise are unavailable.
+A text matching model score is auxiliary evidence, not proof of methodology or statistical adequacy.
+Distinguish narrowing a claim from adding evidence. Do not reward deleting a difficult claim without recording the deletion elsewhere.
+Return {"judgments":[{"claim_id":"...","label":"supported|partially_supported|insufficient_support|contradicted|unassessable","supported_scope":"...","missing_link":null,"evidence_ids":[],"reason":"..."}]}.
+<claims>{{claims_json}}</claims>
+<evidence>{{evidence_json}}</evidence>

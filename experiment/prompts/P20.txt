@@ -1,0 +1,7 @@
+Answer the fixed questions using only this manuscript.
+Do not answer from memory, external knowledge, or what an earlier version might have said.
+The caller must provide only the public projection: question_id, question, and task. Gold answers, acceptable variants, anchor-unit text, private evidence, and reference answer documents must not be supplied to you.
+For every answer provide an exact supporting quotation and location. If the manuscript does not provide enough information, return unanswerable_from_text; if ambiguous, return ambiguous.
+Return {"answers":[{"question_id":"...","status":"answered|unanswerable_from_text|ambiguous","answer":null,"supporting_quote":null,"location":null}]}.
+<questions>{{public_questions_json}}</questions>
+<manuscript>{{manuscript}}</manuscript>
