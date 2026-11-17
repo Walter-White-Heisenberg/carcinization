@@ -1,0 +1,134 @@
+{
+  "selection_id": "pilot_selection_20261118_v1",
+  "status": "prepared_not_activated_no_paid_calls",
+  "selection_rule": "Keep three selected older papers; add topic-matched papers whose arXiv v1 is strictly after 2026-04-30 UTC. Select latest arXiv version at preparation and freeze exact URL and hash.",
+  "new_paper_date_threshold_utc": "2026-04-30T23:59:59+00:00",
+  "training_exclusion_guaranteed": false,
+  "sampling": "Purposive topic-paired exploratory pilot; not a randomized exposure comparison. Papers differ in age, methods, length and publication status.",
+  "old_papers": [
+    {
+      "paper_id": "old_fewshot",
+      "topic": "few_shot_classification",
+      "title": "A Closer Look at Few-shot Classification",
+      "venue": "ICLR 2019",
+      "source_url": "https://openreview.net/forum?id=HkxLXnAcFQ",
+      "exposure_class": "public_older_paper_training_inclusion_unproven",
+      "selection_status": "selected_for_preparation_version_not_yet_locked"
+    },
+    {
+      "paper_id": "old_mixup",
+      "topic": "mixup_and_data_augmentation",
+      "title": "How Does Mixup Help With Robustness and Generalization?",
+      "venue": "ICLR 2021",
+      "source_url": "https://openreview.net/forum?id=8yKEo06dKNo",
+      "exposure_class": "public_older_paper_training_inclusion_unproven",
+      "selection_status": "selected_for_preparation_version_not_yet_locked"
+    },
+    {
+      "paper_id": "old_ppo",
+      "topic": "ppo_implementation_analysis",
+      "title": "Implementation Matters in Deep RL: A Case Study on PPO and TRPO",
+      "venue": "ICLR 2020",
+      "source_url": "https://iclr.cc/virtual_2020/poster_r1etN1rtPB.html",
+      "exposure_class": "public_older_paper_training_inclusion_unproven",
+      "selection_status": "selected_for_preparation_version_not_yet_locked"
+    }
+  ],
+  "new_papers": [
+    {
+      "paper_id": "new_fewshot",
+      "pair_id": "old_fewshot",
+      "topic": "few_shot_classification",
+      "title": "Decompose, Compare, and Decide: Multimodal LLMs are Implicit Few-Shot Learners",
+      "authors": [
+        "Wang, Yunhan",
+        "Khandelwal, Eshika",
+        "Araujo, Edson",
+        "Bousselham, Walid",
+        "Shvetsova, Nina",
+        "Kuehne, Hilde"
+      ],
+      "arxiv_id": "2607.00125",
+      "v1_submitted_at_utc": "2026-06-30T20:00:50+00:00",
+      "selected_version": 1,
+      "selected_version_submitted_at_utc": "2026-06-30T20:00:50+00:00",
+      "abs_url": "https://arxiv.org/abs/2607.00125",
+      "pdf_url": "https://arxiv.org/pdf/2607.00125v1",
+      "version_history": [
+        {
+          "version": 1,
+          "submitted_at_utc": "2026-06-30T20:00:50+00:00"
+        }
+      ],
+      "latest_version_verified_at_utc": "2026-11-17T20:05:25.591441+00:00",
+      "html_sha256": "788fdc1c01cadaaa5b516d336783587a42fb872715b3b45ad1ac81238963bf96",
+      "pdf_sha256": "9c15f18f0b54ac8d8a909072d8f146c1afa72a39a4fa288d2e532d2814fe6fad",
+      "pdf_pages": 31,
+      "exposure_class": "v1_after_2026_04_30_training_exclusion_unproven",
+      "selection_status": "selected_for_preparation_not_activated"
+    },
+    {
+      "paper_id": "new_mixup",
+      "pair_id": "old_mixup",
+      "topic": "mixup_and_data_augmentation",
+      "title": "$S^{2}$-FracMix: Label-Preserving Self-Saliency Mixup Augmentation",
+      "authors": [
+        "Islam, Khawar",
+        "Mahmood, Arif",
+        "Jin, Xin",
+        "Akhtar, Naveed"
+      ],
+      "arxiv_id": "2606.25784",
+      "v1_submitted_at_utc": "2026-06-24T13:00:39+00:00",
+      "selected_version": 1,
+      "selected_version_submitted_at_utc": "2026-06-24T13:00:39+00:00",
+      "abs_url": "https://arxiv.org/abs/2606.25784",
+      "pdf_url": "https://arxiv.org/pdf/2606.25784v1",
+      "version_history": [
+        {
+          "version": 1,
+          "submitted_at_utc": "2026-06-24T13:00:39+00:00"
+        }
+      ],
+      "latest_version_verified_at_utc": "2026-11-17T20:05:32.704000+00:00",
+      "html_sha256": "30a897424b9e3114fbded9fca5c3351db9b0eb2e49168dd038ee26849c76c294",
+      "pdf_sha256": "52bb10dbaecae453b978a39be58fcf577befd41b4acbca78cbddd7e87a6f0434",
+      "pdf_pages": 26,
+      "exposure_class": "v1_after_2026_04_30_training_exclusion_unproven",
+      "selection_status": "selected_for_preparation_not_activated"
+    },
+    {
+      "paper_id": "new_ppo",
+      "pair_id": "old_ppo",
+      "topic": "ppo_implementation_analysis",
+      "title": "Where Entropy Is Measured Matters: Policy Geometry in Bounded Continuous-Control PPO",
+      "authors": [
+        "He, Yiyang",
+        "Zhou, Zhichun",
+        "Wang, Ziwei",
+        "Xue, Tao",
+        "Fei, Haolin"
+      ],
+      "arxiv_id": "2608.24488",
+      "v1_submitted_at_utc": "2026-08-25T12:36:09+00:00",
+      "selected_version": 1,
+      "selected_version_submitted_at_utc": "2026-08-25T12:36:09+00:00",
+      "abs_url": "https://arxiv.org/abs/2608.24488",
+      "pdf_url": "https://arxiv.org/pdf/2608.24488v1",
+      "version_history": [
+        {
+          "version": 1,
+          "submitted_at_utc": "2026-08-25T12:36:09+00:00"
+        }
+      ],
+      "latest_version_verified_at_utc": "2026-11-17T20:05:39.808587+00:00",
+      "html_sha256": "9cc946ea99cf2320d72e8f4a52a18d7a2f30a5caae9c0f4bda4cd4b67f55f5ef",
+      "pdf_sha256": "0b65e991f3c059c39a7e6991890f621b097c4f3e9bfbd06d829a7ecbe5c8436f",
+      "pdf_pages": 24,
+      "exposure_class": "v1_after_2026_04_30_training_exclusion_unproven",
+      "selection_status": "selected_for_preparation_not_activated"
+    }
+  ],
+  "planned_generation_slots": 378,
+  "execution_authorized_by_this_selection": false
+}
