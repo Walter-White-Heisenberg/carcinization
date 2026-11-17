@@ -1,0 +1,23 @@
+"""Registered component names, not a quality aggregation mechanism."""
+COMPONENTS={
+ 'S01':['D'],'S02':['C'],'S03':['delta_C'],'S04':['distance'],'S05':['distance'],
+ 'S06':['similarity'],'S07':['similarity'],'S08':['distance'],'S09':['specificity'],
+ 'S10':['vendi'],'S11':['similarity'],'S12':['distance'],'S13':['initial_homogeneous','n_papers','rate'],
+ 'J01':['valid','invalid','uncertain','disputed','precision','coverage'],
+ 'J02':['found','fixed_n','unknown','lower','upper','evaluable','unknown_found','unknown_not_found','repaired','not_applicable'],
+ 'J03':['retained','eligible','rate','unknown'],'J04':['persisted','eligible','rate','became_valid','unknown'],
+ 'J05':['new','returned','initial'],'J06':['reversed','opportunities','rate','excluded','unknown'],
+ 'Q11':['repaired','removed','remaining','unassessable','initial_confirmed_error','repair_rate','lower','upper'],
+ 'Q12':['newly_introduced_error','newly_detected_preexisting_error','origin_unknown','verified_count','audited_count','unverified','coverage','lower','upper'],
+ 'Q21':['supported','partially_supported','insufficient_support','contradicted','unassessable','total'],
+ 'Q22':['minicheck_raw_score','alignscore_raw_score'],
+ 'Q31':['sufficient','partial','missing','not_applicable','unknown','applicable_assessable','coverage','lower','upper'],
+ 'Q32':['covered','fixed_n','unknown','lower','upper'],
+ 'Q41':['retained','fixed_n','narrowed','omitted','distorted','unassessable','lower','upper'],'Q42':['valid_added','invalid_added','unverified_added','total'],
+ 'Q43':['recall','precision','f1','matched_acus','reference_acus'],'Q51':['correct','comparable','fixed_n','accuracy','coverage'],
+ 'Q52':['answer_time','location_time','clarifications','respondents'],'Q53':['a_better','b_better','tie','uncertain','respondents'],
+ 'V01':['precision','recall','f1','kappa','matched_blocks','m_ratio','o_ratio'],'V02':['precision','recall','f1','fpr','fnr','coverage','count'],
+ 'V03':['agreement','kappa','count'],'V04':['error','unknown','coverage','count','lower','upper'],
+ 'V05':['agreement','flip_rate','count'],'X01':['count','rate','planned','terminal_no_issue'],
+ 'X02':['input_tokens','output_tokens','reasoning_tokens','cache_read_tokens','cache_write_tokens','cost','elapsed_seconds','units','violations'],
+ 'X03':['distance_to_start','distance_to_keep','step'],'X04':['ordinal_rating','count']}
