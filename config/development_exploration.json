@@ -1,0 +1,43 @@
+{
+  "profile": "carcinization_development_v1",
+  "evidence_class": "diagnostic_only",
+  "role": "project_adaptation_of_research_methodology_not_book_prescription",
+  "paper_split": "development",
+  "paper_id": null,
+  "model_snapshot": null,
+  "generation_prompt": "P01",
+  "generation_prompt_source": "experiment/prompts/P01.txt",
+  "conditions": [
+    "A_LOOP",
+    "A_INDEPENDENT"
+  ],
+  "trajectories": 3,
+  "stages": {
+    "E0": {
+      "updates": 2,
+      "purpose": "engineering_chain_and_measurement_feasibility",
+      "planned_generation_slots": 15
+    },
+    "E1": {
+      "updates": 10,
+      "purpose": "single_paper_development_observation",
+      "planned_generation_slots": 63
+    }
+  },
+  "metrics": [
+    "S01",
+    "S02",
+    "S03"
+  ],
+  "pilot_outputs": false,
+  "human_primary_endpoint_claim": false,
+  "confirmatory_claim": false,
+  "actual_calls": 0,
+  "budget": {
+    "currency": null,
+    "hard_cap": null
+  },
+  "requires_provider_adapter": true,
+  "full_pilot_activation_applies": false,
+  "production_guards_may_be_disabled": false
+}
